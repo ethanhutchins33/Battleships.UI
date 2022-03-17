@@ -9,6 +9,8 @@ trigger:
 pool:
   name: Self-Hosted
 
+container: ukhydrographicoffice/terraform-azure-powershell
+
 variables:
   - group: "Battleships Terraform Secrets"
 
