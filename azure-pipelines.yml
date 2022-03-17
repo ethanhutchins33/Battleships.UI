@@ -22,3 +22,6 @@ steps:
   displayName: 'npm install and build'
   workingDirectory: '$(Build.SourcesDirectory)/BattleShip_Site'
 
+#add terraform here
+
+#publish code to resources created by terraform

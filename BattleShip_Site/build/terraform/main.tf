@@ -1,5 +1,8 @@
 #define main terraform modules
 
+#backend configuration here
+
+
 #create resource group
 resource "azurerm_resource_group" "rg" {
   name     = "battleship_terraform_rg"
