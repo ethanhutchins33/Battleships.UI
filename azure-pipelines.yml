@@ -9,6 +9,9 @@ trigger:
 pool:
   name: Self-Hosted
 
+variables:
+  - group: "Battleships Terraform Secrets"
+
 steps:
 - task: NodeTool@0
   inputs:
@@ -22,6 +25,11 @@ steps:
   displayName: 'npm install and build'
   workingDirectory: '$(Build.SourcesDirectory)/BattleShip_Site'
 
-#add terraform here
+- bash: |
+    terraform init \
+    -backend-config="storage_account_name=$tf-storage-account-name" \
+    -backend-config="container_name=$tf-container-name" \
+    -backend-config="key=$tf-key" \
+    -backend-config="resource_group_name=$tf-resource-group-name"
 
 #publish code to resources created by terraform

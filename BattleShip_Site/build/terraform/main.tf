@@ -1,6 +1,6 @@
 #define main terraform modules
 
-#backend configuration here
+
 
 
 #create resource group
