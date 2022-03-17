@@ -22,14 +22,31 @@ steps:
     npm install -g @angular/cli
     npm install
     ng build --prod
-  displayName: 'npm install and build'
+  displayName: 'npm install angular and build app'
   workingDirectory: '$(Build.SourcesDirectory)/BattleShip_Site'
 
+
+#give terraform permissions here?
+
+
+#Initialise terraform using manually defined project secrets (variables in Battleships Terraform Secrets). Gives terraform access and location to store .tfstate file in azure blob storage.
 - bash: |
     terraform init \
     -backend-config="storage_account_name=$tf-storage-account-name" \
     -backend-config="container_name=$tf-container-name" \
     -backend-config="key=$tf-key" \
     -backend-config="resource_group_name=$tf-resource-group-name"
+  displayName: 'terraform init'
 
-#publish code to resources created by terraform
+
+#Or give terraform permissions here??
+
+
+#- bash: | terraform plan
+
+#- bash: | terraform apply 
+
+
+
+
+## publish code to resources created by terraform
