@@ -21,9 +21,9 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    npm install -g @angular/cli
+    npm install -g @angular/cli@13.2.6
     npm install
-    ng build --prod
+    ng build
   displayName: 'npm install angular and build app'
   workingDirectory: '$(Build.SourcesDirectory)/BattleShip_Site'
 
@@ -32,11 +32,11 @@ steps:
 
 
 #Initialise terraform using manually defined project secrets (variables in Battleships Terraform Secrets). Gives terraform access and location to store .tfstate file in azure blob storage.
-- bash: |
-    terraform init \
-    -backend-config="storage_account_name=$tf-storage-account-name" \
-    -backend-config="container_name=$tf-container-name" \
-    -backend-config="key=$tf-key" \
+- script: |
+    terraform init 
+    -backend-config="storage_account_name=$tf-storage-account-name" 
+    -backend-config="container_name=$tf-container-name" 
+    -backend-config="key=$tf-key" 
     -backend-config="resource_group_name=$tf-resource-group-name"
   displayName: 'terraform init'
 
