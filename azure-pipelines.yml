@@ -12,7 +12,7 @@ variables:
 pool:
   name: Self-Hosted
 
-container: ukhydrographicoffice/terraform-azure-powershell:latest
+#container: ukhydrographicoffice/terraform-azure-powershell:latest
 
 steps:
 - task: NodeTool@0
