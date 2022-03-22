@@ -6,13 +6,13 @@
 trigger:
 - main
 
+variables:
+  - group: "Battleships Terraform Secrets"
+
 pool:
   name: Self-Hosted
 
 container: ukhydrographicoffice/terraform-azure-powershell:latest
-
-variables:
-  - group: "Battleships Terraform Secrets"
 
 steps:
 - task: NodeTool@0
@@ -29,7 +29,10 @@ steps:
 
 
 #give terraform permissions here?
-
+- task: TerraformInstaller
+  displayName: 'Use Terraform latest'
+  inputs:
+    terraformVersion: latest
 
 #Initialise terraform using manually defined project secrets (variables in Battleships Terraform Secrets). Gives terraform access and location to store .tfstate file in azure blob storage.
 - bash: |
