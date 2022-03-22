@@ -29,10 +29,7 @@ steps:
 
 
 #give terraform permissions here?
-- task: TerraformInstaller@latest
-  displayName: 'Use Terraform latest'
-  inputs:
-    terraformVersion: latest
+
 
 #Initialise terraform using manually defined project secrets (variables in Battleships Terraform Secrets). Gives terraform access and location to store .tfstate file in azure blob storage.
 - bash: |
