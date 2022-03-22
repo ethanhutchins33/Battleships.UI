@@ -5,7 +5,6 @@
 
 trigger:
 - main
-- terraform
 
 variables:
   - group: "Battleships Terraform Secrets"
@@ -31,7 +30,7 @@ steps:
 
 #give terraform permissions here?
 
-- bash: ls $(terraform-working-directory)
+- bash: ls '$(Build.SourcesDirectory)/BattleShip_Site/build/terraform'
 
 #Initialise terraform using manually defined project secrets (variables in Battleships Terraform Secrets). Gives terraform access and location to store .tfstate file in azure blob storage.
 - bash: |
