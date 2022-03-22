@@ -29,7 +29,7 @@ steps:
 
 
 #give terraform permissions here?
-- task: TerraformInstaller
+- task: TerraformInstaller@latest
   displayName: 'Use Terraform latest'
   inputs:
     terraformVersion: latest
