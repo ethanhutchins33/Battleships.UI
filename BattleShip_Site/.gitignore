@@ -37,6 +37,9 @@ yarn-error.log
 testem.log
 /typings
 
+# Azure
+azure.conf
+
 # terraform
 .terraform*
 
