@@ -1,1 +1,0 @@
-#output variables, can be picked up by .yml pipeline
