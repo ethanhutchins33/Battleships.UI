@@ -12,7 +12,7 @@ pool:
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '10.x'
+    versionSpec: '16.x'
   displayName: 'Install Node.js'
 
 - script: |
@@ -20,3 +20,4 @@ steps:
     npm install
     ng build --prod
   displayName: 'npm install and build'
+  workingDirectory: '$(Build.SourcesDirectory)/BattleShip_Site'
