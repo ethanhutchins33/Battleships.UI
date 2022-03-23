@@ -30,11 +30,6 @@ steps:
   displayName: 'npm install angular and build app'
   workingDirectory: '$(Build.SourcesDirectory)/BattleShip_Site'
 
-- task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
-  inputs:
-    terraformVersion: 1.1.7
-  displayName: Install Terraform 1.1.7
-  
 #give terraform permissions here?
 
 #Initialise terraform using manually defined project secrets (variables in Battleships Terraform Secrets). Gives terraform access and location to store .tfstate file in azure blob storage.
