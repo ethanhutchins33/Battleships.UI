@@ -7,7 +7,7 @@ trigger:
 - main
 
 pool:
-  vmImage: Self-Hosted
+  name: Self-Hosted
 
 steps:
 - task: NodeTool@0
