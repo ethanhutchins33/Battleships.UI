@@ -24,10 +24,10 @@ jobs:
   steps:
   - checkout: self
     clean: true
-  - task: TerraformInstaller@0
-    displayName: Install Terraform 1.1.7
-    inputs:
-      terraformVersion: 1.1.7
+#  - task: TerraformInstaller@0
+ #   displayName: Install Terraform 1.1.7
+  #  inputs:
+   #   terraformVersion: 1.1.7
   - task: CmdLine@2
     displayName: Terraform Init
     inputs:
