@@ -6,7 +6,7 @@
 #pipeline will run when changes pushed to main branch
 trigger:
   - main
-
+  
 #import variable from azure keyvault
 variables:
   - group: "Battleships Terraform Secrets"
@@ -15,43 +15,44 @@ variables:
 pool:
   name: Self-Hosted
 
-container: ukhydrographicoffice/terraform-azure-powershell:latest
+stages:
+  - stage: A
+    jobs:
+      - job: A1
+        steps:
+        - task: NodeTool@0
+          inputs:
+            versionSpec: '16.x'
+          displayName: 'Install Node.js'
+      
+      - job: A2
+        steps:
+        - script: |
+            npm install -g @angular/cli@13.2.6
+            npm install
+            ng build
+          displayName: 'npm install Angular and build app'
+          workingDirectory: '$(Build.SourcesDirectory)/BattleShip_Site'
+          
+  - stage: B
+    jobs:
+      - job: B1
+        container: ukhydrographicoffice/terraform-azure-powershell:latest
+        steps:
+        - bash: |
+            terraform init \
+            -backend-config="storage_account_name=$tf-storage-account-name" \
+            -backend-config="container_name=$tf-container-name" \
+            -backend-config="key=$tf-key" \
+            -backend-config="resource_group_name=$tf-resource-group-name"
+          displayName: 'terraform init'
+          workingDirectory: '$(Build.SourcesDirectory)/BattleShip_Site/build/terraform'
 
-steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '16.x'
-  displayName: 'Install Node.js'
-
-- script: |
-    npm install -g @angular/cli@13.2.6
-    npm install
-    ng build
-  displayName: 'npm install Angular and build app'
-  workingDirectory: '$(Build.SourcesDirectory)/BattleShip_Site'
-
-- bash: |
-    terraform init \
-    -backend-config="storage_account_name=$tf-storage-account-name" \
-    -backend-config="container_name=$tf-container-name" \
-    -backend-config="key=$tf-key" \
-    -backend-config="resource_group_name=$tf-resource-group-name"
-  displayName: 'terraform init'
-
-#give terraform permissions here?
-
+          
 #Initialise terraform using manually defined project secrets (variables in Battleships Terraform Secrets). Gives terraform access #and location to store .tfstate file in azure blob storage.
-
-
-
-#Or give terraform permissions here??
-
 
 #- bash: | terraform plan
 
 #- bash: | terraform apply 
-
-
-
 
 ## publish code to resources created by terraform
