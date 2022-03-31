@@ -15,27 +15,23 @@ variables:
 pool:
   name: Self-Hosted
 
-
 jobs:
   - job: A1
+    container: ukhydrographicoffice/terraform-azure-powershell:latest
     steps:
+
     - task: NodeTool@0
       inputs:
         versionSpec: '16.x'
       displayName: 'Install Node.js'
-  
-  - job: A2
-    steps:
+
     - script: |
         npm install -g @angular/cli@13.2.6
         npm install
         ng build
       displayName: 'npm install Angular and build app'
       workingDirectory: '$(Build.SourcesDirectory)/BattleShip_Site'
-      
-  - job: B1
-    container: ukhydrographicoffice/terraform-azure-powershell:latest
-    steps:
+
     - bash: |
         terraform init \
         -backend-config="storage_account_name=$tf-storage-account-name" \
