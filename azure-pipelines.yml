@@ -15,7 +15,7 @@ variables:
 pool:
   name: Self-Hosted
 
-#container: ukhydrographicoffice/terraform-azure-powershell:latest
+container: ukhydrographicoffice/terraform-azure-powershell:latest
 
 steps:
 - task: NodeTool@0
@@ -30,10 +30,6 @@ steps:
   displayName: 'npm install angular and build app'
   workingDirectory: '$(Build.SourcesDirectory)/BattleShip_Site'
 
-- task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
-  inputs:
-    terraformVersion: 1.1.7
-  displayName: Install Terraform 1.1.7
   
 #give terraform permissions here?
 
