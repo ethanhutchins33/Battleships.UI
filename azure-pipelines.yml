@@ -15,7 +15,7 @@ variables:
 pool:
   name: Self-Hosted
 
-container: ukhydrographicoffice/terraform-azure-powershell:latest
+  container: { ukhydrographicoffice/terraform-azure-powershell:latest }
 
 steps:
 - task: NodeTool@0
@@ -27,13 +27,9 @@ steps:
     npm install -g @angular/cli@13.2.6
     npm install
     ng build
-  displayName: 'npm install angular and build app'
+  displayName: 'npm install Angular and build app'
   workingDirectory: '$(Build.SourcesDirectory)/BattleShip_Site'
 
-  
-#give terraform permissions here?
-
-#Initialise terraform using manually defined project secrets (variables in Battleships Terraform Secrets). Gives terraform access and location to store .tfstate file in azure blob storage.
 - bash: |
     terraform init \
     -backend-config="storage_account_name=$tf-storage-account-name" \
@@ -41,6 +37,11 @@ steps:
     -backend-config="key=$tf-key" \
     -backend-config="resource_group_name=$tf-resource-group-name"
   displayName: 'terraform init'
+
+#give terraform permissions here?
+
+#Initialise terraform using manually defined project secrets (variables in Battleships Terraform Secrets). Gives terraform access #and location to store .tfstate file in azure blob storage.
+
 
 
 #Or give terraform permissions here??
