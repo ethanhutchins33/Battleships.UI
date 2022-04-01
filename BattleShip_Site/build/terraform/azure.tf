@@ -4,7 +4,6 @@ terraform {
     storage_account_name="ehbsstorage"
     container_name="terraform-blob"
     key="terraform.tfstate"
-    
   }
 
   required_providers {
