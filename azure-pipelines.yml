@@ -32,12 +32,12 @@ jobs:
       displayName: 'npm install Angular and build app'
       workingDirectory: '$(Build.SourcesDirectory)/BattleShip_Site'
 
+      #Initialise terraform using manually defined project secrets (variables in Battleships Terraform Secrets). Gives terraform access #and location to store .tfstate file in azure blob storage.
     - bash: |
         terraform init \
         -backend-config="resource_group_name=$tf-resource-group-name" \
         -backend-config="storage_account_name=$tf-storage-account-name" \
-        -backend-config="container_name=$tf-container-name" \
-        -backend-config="key=$tf-key" 
+        -backend-config="container_name=$tf-container-name"
       displayName: 'terraform init'
       workingDirectory: '$(Build.SourcesDirectory)/BattleShip_Site/build/terraform'
       env:
@@ -47,9 +47,6 @@ jobs:
         TF_VAR_ARM_CLIENT_ID: $(tf-client-id)
         TF_VAR_ARM_CLIENT_SECRET: $(tf-client-secret)
         #TF_VAR_ARM_OBJECT_ID: $()
-
-          
-#Initialise terraform using manually defined project secrets (variables in Battleships Terraform Secrets). Gives terraform access #and location to store .tfstate file in azure blob storage.
 
 #- bash: | terraform plan
 
