@@ -4,7 +4,7 @@ terraform {
     storage_account_name="ehbsstorage"
     container_name="terraform-blob"
     key="terraform.tfstate"
-    access_key = "ylmjkYdMh5MQAM+gqtrZ2d+QWRgDsuxii/IXQ8Ue1mD24tO34sRpYxojZSuNGk0Y1wX9c1QTPLuf8Qa29KbQDQ=="
+    
   }
 
   required_providers {
