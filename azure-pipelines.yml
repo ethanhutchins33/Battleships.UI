@@ -46,6 +46,7 @@ jobs:
         TF_VAR_ARM_TENANT_ID: $(tf-tenant-id)
         TF_VAR_ARM_CLIENT_ID: $(tf-client-id)
         TF_VAR_ARM_CLIENT_SECRET: $(tf-client-secret)
+        ARM_ACCESS_KEY: $(tf-access-key)
 
 
     - bash: |
