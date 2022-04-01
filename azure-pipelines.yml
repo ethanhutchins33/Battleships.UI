@@ -35,11 +35,7 @@ jobs:
       #Initialise terraform using manually defined project secrets (variables in Battleships Terraform Secrets). Gives terraform access #and location to store .tfstate file in azure blob storage. 
 
     - bash: |
-        terraform init \
-        -backend-config="resource_group_name=$tf-resource-group-name" \
-        -backend-config="storage_account_name=$tf-storage-account-name" \
-        -backend-config="container_name=$tf-container-name" \
-        -backend-config="key=$tf-key"
+        terraform init 
       displayName: 'terraform init'
       workingDirectory: '$(Build.SourcesDirectory)/BattleShip_Site/build/terraform'
       env:
