@@ -9,7 +9,7 @@ trigger:
   
 #import variable from azure keyvault
 variables:
-  - group: "Battleships Terraform Secrets"
+  - group: BattleshipsTerraformSecrets
 
 #use pool named 'Self-Hosted' defined in azure devops.
 pool:
