@@ -34,12 +34,19 @@ jobs:
 
     - bash: |
         terraform init \
+        -backend-config="resource_group_name=$tf-resource-group-name" \
         -backend-config="storage_account_name=$tf-storage-account-name" \
         -backend-config="container_name=$tf-container-name" \
-        -backend-config="key=$tf-key" \
-        -backend-config="resource_group_name=$tf-resource-group-name"
+        -backend-config="key=$tf-key" 
       displayName: 'terraform init'
       workingDirectory: '$(Build.SourcesDirectory)/BattleShip_Site/build/terraform'
+      env:
+        TF_VAR_ARM_SUBSCRIPTION_ID: $(tf-subscription-id)
+        TF_VAR_ARM_TENANT_ID: $(tf-tenant-id)
+        #ARM_ACCESS_KEY: $()
+        TF_VAR_ARM_CLIENT_ID: $(tf-client-id)
+        TF_VAR_ARM_CLIENT_SECRET: $(tf-client-secret)
+        #TF_VAR_ARM_OBJECT_ID: $()
 
           
 #Initialise terraform using manually defined project secrets (variables in Battleships Terraform Secrets). Gives terraform access #and location to store .tfstate file in azure blob storage.
