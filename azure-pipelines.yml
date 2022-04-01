@@ -37,7 +37,8 @@ jobs:
         terraform init \
         -backend-config="resource_group_name=$tf-resource-group-name" \
         -backend-config="storage_account_name=$tf-storage-account-name" \
-        -backend-config="container_name=$tf-container-name"
+        -backend-config="container_name=$tf-container-name" \
+        -backend-config="key=$tf-key"
       displayName: 'terraform init'
       workingDirectory: '$(Build.SourcesDirectory)/BattleShip_Site/build/terraform'
       env:
@@ -45,7 +46,6 @@ jobs:
         TF_VAR_ARM_TENANT_ID: $(tf-tenant-id)
         TF_VAR_ARM_CLIENT_ID: $(tf-client-id)
         TF_VAR_ARM_CLIENT_SECRET: $(tf-client-secret)
-        ARM_ACCESS_KEY: $(tf-key)
 
 #- bash: | terraform plan
 
