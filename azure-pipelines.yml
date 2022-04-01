@@ -50,4 +50,15 @@ jobs:
 
 #- bash: | terraform apply 
 
+    - bash: |
+        terraform apply "tfplan"
+      displayName: 'terraform apply'
+      workingDirectory: '$(Build.SourcesDirectory)/BattleShip_Site/build/terraform'
+      env:
+        TF_VAR_ARM_SUBSCRIPTION_ID: $(tf-subscription-id)
+        TF_VAR_ARM_TENANT_ID: $(tf-tenant-id)
+        TF_VAR_ARM_CLIENT_ID: $(tf-client-id)
+        TF_VAR_ARM_CLIENT_SECRET: $(tf-client-secret)
+        ARM_ACCESS_KEY: $(tf-access-key)
+
 ## publish code to resources created by terraform
