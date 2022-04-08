@@ -4,20 +4,71 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- main
+  - main
+  
+#import variable from azure keyvault
+variables:
+  - group: BattleshipsTerraformSecrets
 
+#use pool named 'Self-Hosted' defined in azure devops.
 pool:
   name: Self-Hosted
 
-steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '16.x'
-  displayName: 'Install Node.js'
+jobs:
+  - job: A1
+    container: ukhydrographicoffice/terraform-azure-powershell:latest
+    steps:
+      
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '16.x'
+      displayName: 'Install Node.js'
 
-- script: |
-    npm install -g @angular/cli
-    npm install
-    ng build --prod
-  displayName: 'npm install and build'
-  workingDirectory: '$(Build.SourcesDirectory)/BattleShip_Site'
+    - script: |
+        npm install -g @angular/cli@13.2.6
+        npm install
+        ng build
+      displayName: 'npm install Angular and build app'
+      workingDirectory: '$(Build.SourcesDirectory)/BattleShip_Site'
+
+      #Initialise terraform using manually defined project secrets (variables in Battleships Terraform Secrets). Gives terraform access #and location to store .tfstate file in azure blob storage. 
+
+    - bash: |
+        terraform init 
+      displayName: 'terraform init'
+      workingDirectory: '$(Build.SourcesDirectory)/BattleShip_Site/build/terraform'
+      env:
+        TF_VAR_ARM_SUBSCRIPTION_ID: $(tf-subscription-id)
+        TF_VAR_ARM_TENANT_ID: $(tf-tenant-id)
+        TF_VAR_ARM_CLIENT_ID: $(tf-client-id)
+        TF_VAR_ARM_CLIENT_SECRET: $(tf-client-secret)
+        ARM_ACCESS_KEY: $(tf-access-key)
+
+#- bash: | terraform plan
+
+    - bash: |
+        terraform plan -input=false -out=tfplan
+      displayName: 'terraform plan'
+      workingDirectory: '$(Build.SourcesDirectory)/BattleShip_Site/build/terraform'
+      env:
+        TF_VAR_ARM_SUBSCRIPTION_ID: $(tf-subscription-id)
+        TF_VAR_ARM_TENANT_ID: $(tf-tenant-id)
+        TF_VAR_ARM_CLIENT_ID: $(tf-client-id)
+        TF_VAR_ARM_CLIENT_SECRET: $(tf-client-secret)
+        ARM_ACCESS_KEY: $(tf-access-key)
+
+#- bash: | terraform apply 
+
+    - bash: |
+        terraform apply "tfplan"
+      displayName: 'terraform apply'
+      workingDirectory: '$(Build.SourcesDirectory)/BattleShip_Site/build/terraform'
+      env:
+        TF_VAR_ARM_SUBSCRIPTION_ID: $(tf-subscription-id)
+        TF_VAR_ARM_TENANT_ID: $(tf-tenant-id)
+        TF_VAR_ARM_CLIENT_ID: $(tf-client-id)
+        TF_VAR_ARM_CLIENT_SECRET: $(tf-client-secret)
+        ARM_ACCESS_KEY: $(tf-access-key)
+
+## publish code to resources created by terraform
+
