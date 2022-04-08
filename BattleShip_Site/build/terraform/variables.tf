@@ -1,6 +1,4 @@
 #define variables
-
-
 variable "ARM_SUBSCRIPTION_ID" {
   type = string
   description = "Azure Subcription ID to use for authenticating terraform while running in build pipeline"
