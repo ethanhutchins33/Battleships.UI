@@ -69,3 +69,17 @@ jobs:
 
 ## publish code to resources created by terraform
 
+  - job: Deploy
+    displayName: 'Deploy'
+    pool:
+      vmImage: 'windows-latest'
+    dependsOn: 'A1'
+
+    steps:    
+    - task: AzureFileCopy@3
+      inputs:
+        SourcePath: '$(System.DefaultWorkingDirectory)/BattleShip_Site/SPA/BattleShips/dist'
+        azureSubscription: 'Visual Studio Enterprise Subscription(a334913d-52be-4a66-9c85-c23d324393f0)'
+        Destination: 'AzureBlob'
+        storage: 'battleships-static-site'
+        ContainerName: '$web'
