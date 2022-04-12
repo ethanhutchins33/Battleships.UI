@@ -90,5 +90,5 @@ jobs:
         SourcePath: '$(Pipeline.Workspace)\drop'
         azureSubscription: 'Visual Studio Enterprise Subscription(a334913d-52be-4a66-9c85-c23d324393f0)'
         Destination: 'AzureBlob'
-        storage: 'battleships-static-site'
+        storage: 'battleshipsstaticsite'
         ContainerName: '$web'
