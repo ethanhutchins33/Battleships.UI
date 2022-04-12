@@ -67,8 +67,14 @@ jobs:
         TF_VAR_ARM_CLIENT_SECRET: $(tf-client-secret)
         ARM_ACCESS_KEY: $(tf-access-key)
 
-## publish code to resources created by terraform
+# publish artifact to build folder
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(System.DefaultWorkingDirectory)/BattleShip_Site/SPA/BattleShips/dist'
+        artifactType: 'pipeline'
+        artifactName: 'drop'
 
+## publish code to resources created by terraform
   - job: Deploy
     displayName: 'Deploy'
     pool:
@@ -76,9 +82,12 @@ jobs:
     dependsOn: 'A1'
 
     steps:    
+    - download: current
+      artifact: drop
+
     - task: AzureFileCopy@3
       inputs:
-        SourcePath: '$(System.DefaultWorkingDirectory)/BattleShip_Site/SPA/BattleShips/dist'
+        SourcePath: '$(Pipeline.Workspace)\drop'
         azureSubscription: 'Visual Studio Enterprise Subscription(a334913d-52be-4a66-9c85-c23d324393f0)'
         Destination: 'AzureBlob'
         storage: 'battleships-static-site'
