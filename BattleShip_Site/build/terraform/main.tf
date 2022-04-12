@@ -19,7 +19,7 @@ resource "azurerm_storage_account" "static_storage" {
   enable_https_traffic_only = true
 
   static_website {
-    index_document = "index.html"
+    index_document = "directory/battle-ships/index.html"
   }
 }
 
