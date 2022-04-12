@@ -76,7 +76,7 @@ jobs:
 
 ## publish code to resources created by terraform
   - job: Deploy
-    container: mcr.microsoft.com/windows:latest
+    container: windows:latest
     displayName: 'Deploy'
     dependsOn: 'A1'
 
