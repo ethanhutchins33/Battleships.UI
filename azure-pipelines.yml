@@ -74,20 +74,11 @@ jobs:
         artifactType: 'pipeline'
         artifactName: 'drop'
 
-## publish code to resources created by terraform
-  - job: Deploy
-    container: windows:latest
-    displayName: 'Deploy'
-    dependsOn: 'A1'
-
-    steps:    
-    - download: current
-      artifact: drop
-
-    - task: AzureFileCopy@3
+    - task: AzureCLI@2
+      displayName: Azure CLI
       inputs:
-        SourcePath: '$(Pipeline.Workspace)\drop'
-        azureSubscription: 'Visual Studio Enterprise Subscription(a334913d-52be-4a66-9c85-c23d324393f0)'
-        Destination: 'AzureBlob'
-        storage: 'battleshipsstaticsite'
-        ContainerName: '$web'
+        azureSubscription: Visual Studio Enterprise Subscription(a334913d-52be-4a66-9c85-c23d324393f0)
+        scriptType: bash
+        scriptLocation: inlineScript
+        inlineScript: |
+          az storage blob directory upload -c $web --account-name battleshipsstaticsite -s "$(System.DefaultWorkingDirectory)/BattleShip_Site/SPA/BattleShips/dist" -d directory --recursive
