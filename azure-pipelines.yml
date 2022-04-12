@@ -81,5 +81,5 @@ jobs:
         scriptType: bash
         scriptLocation: inlineScript
         inlineScript: |
-          az config set extension.use_dynamic_install=yes_without_prompt \
+          az config set extension.use_dynamic_install=yes_without_prompt 
           az storage blob directory upload -c '$web' --account-name battleshipsstaticsite -s "$(System.DefaultWorkingDirectory)/BattleShip_Site/SPA/BattleShips/dist" -d directory --recursive
