@@ -31,8 +31,7 @@ jobs:
       displayName: 'npm install Angular and build app'
       workingDirectory: '$(Build.SourcesDirectory)/BattleShip_Site/SPA/BattleShips'
 
-      #Initialise terraform using manually defined project secrets (variables in Battleships Terraform Secrets). Gives terraform access #and location to store .tfstate file in azure blob storage. 
-
+#Initialise terraform using manually defined project secrets (variables in Battleships Terraform Secrets). Gives terraform access and location to store .tfstate file in azure blob storage. 
     - bash: |
         terraform init 
       displayName: 'terraform init'
@@ -44,8 +43,7 @@ jobs:
         TF_VAR_ARM_CLIENT_SECRET: $(tf-client-secret)
         ARM_ACCESS_KEY: $(tf-access-key)
 
-#- bash: | terraform plan
-
+# terraform plan
     - bash: |
         terraform plan -input=false -out=tfplan
       displayName: 'terraform plan'
@@ -57,8 +55,7 @@ jobs:
         TF_VAR_ARM_CLIENT_SECRET: $(tf-client-secret)
         ARM_ACCESS_KEY: $(tf-access-key)
 
-#- bash: | terraform apply 
-
+# terraform apply 
     - bash: |
         terraform apply "tfplan"
       displayName: 'terraform apply'
@@ -70,5 +67,19 @@ jobs:
         TF_VAR_ARM_CLIENT_SECRET: $(tf-client-secret)
         ARM_ACCESS_KEY: $(tf-access-key)
 
-## publish code to resources created by terraform
+# publish artifact to build folder
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(System.DefaultWorkingDirectory)/BattleShip_Site/SPA/BattleShips/dist/battle-ships'
+        artifactType: 'pipeline'
+        artifactName: 'drop'
 
+    - task: AzureCLI@2
+      displayName: Azure CLI
+      inputs:
+        azureSubscription: Visual Studio Enterprise Subscription(a334913d-52be-4a66-9c85-c23d324393f0)
+        scriptType: bash
+        scriptLocation: inlineScript
+        inlineScript: |
+          az config set extension.use_dynamic_install=yes_without_prompt
+          az storage blob upload-batch --destination "\$web" --source "$(System.DefaultWorkingDirectory)/BattleShip_Site/SPA/BattleShips/dist/battle-ships" --account-name "battleshipsstaticsite"
