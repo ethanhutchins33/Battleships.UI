@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { MatButtonModule } from '@angular/material/button'
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -11,8 +12,8 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 
-import { MsalModule, MsalRedirectComponent } from '@azure/msal-angular'
-import { PublicClientApplication } from '@azure/msal-browser';
+import { MsalModule, MsalRedirectComponent, MsalGuard } from '@azure/msal-angular'
+import { PublicClientApplication, InteractionType } from '@azure/msal-browser';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -29,6 +30,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     MatButtonModule,
     MatToolbarModule,
     MatListModule,
+    HttpClientModule,
     MsalModule.forRoot( new PublicClientApplication({
       auth: {
         clientId: 'e8c1b39e-79b1-4d52-9439-58f2fb7c2f9e', // Application (client) ID from the app registration
@@ -39,9 +41,21 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
         cacheLocation: 'localStorage',
         storeAuthStateInCookie: isIE, // Set to true for Internet Explorer 11
       }
-    }), null, null)
+    }), {
+      interactionType: InteractionType.Redirect,
+      authRequest: {
+        scopes: ['user.read']
+      }
+    }, {
+      interactionType: InteractionType.Redirect,
+      protectedResourceMap: new Map([
+        ['https://graph.microsoft.com', ['user.read']] // enter the graph endpoint here?
+      ])
+    })
   ],
-  providers: [],
+  providers: [
+    MsalGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
