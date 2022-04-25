@@ -34,8 +34,17 @@ export class AppComponent implements OnInit {
     this.authService.loginRedirect();
   }
 
+  logout() {
+    this.authService.logoutRedirect({
+      postLogoutRedirectUri: 'http://localhost:4200'
+    });
+  }
+
   setLoginDisplay() {
     this.loginDisplay = this.authService.instance.getAllAccounts().length > 0;
+    var accounts = this.authService.instance.getAllAccounts();
+    console.log(accounts.length);
+    console.log(accounts[0]);
   }
 
   ngOnDestroy(): void {
