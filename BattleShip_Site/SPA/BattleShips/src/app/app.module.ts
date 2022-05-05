@@ -35,7 +35,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
       auth: {
         clientId: 'e8c1b39e-79b1-4d52-9439-58f2fb7c2f9e', // Application (client) ID from the app registration
         authority: 'https://login.microsoftonline.com/common', // The Azure cloud instance and the app's sign-in audience (tenant ID, common, organizations, or consumers)
-        redirectUri: 'http://localhost:4200'// This is your redirect URI
+        redirectUri: 'https://battleshipsstaticsite.z6.web.core.windows.net/'// This is your redirect URI
       },
       cache: {
         cacheLocation: 'localStorage',

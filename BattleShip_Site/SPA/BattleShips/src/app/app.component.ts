@@ -36,7 +36,7 @@ export class AppComponent implements OnInit {
 
   logout() {
     this.authService.logoutRedirect({
-      postLogoutRedirectUri: 'http://localhost:4200'
+      postLogoutRedirectUri: 'https://battleshipsstaticsite.z6.web.core.windows.net/'
     });
   }
 
