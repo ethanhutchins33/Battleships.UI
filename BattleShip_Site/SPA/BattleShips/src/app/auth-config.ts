@@ -18,15 +18,15 @@
  export const b2cPolicies = {
      names: {
          signUpSignIn: "B2C_1_signupsignin1",
-         //editProfile: "b2c_1_edit_profile_v2"
+         editProfile: "B2C_1_edit_profile_v1"
      },
      authorities: {
          signUpSignIn: {
              authority: "https://ethanb2c.b2clogin.com/ethanb2c.onmicrosoft.com/B2C_1_signupsignin1",
          },
-        //  editProfile: {
-        //      authority: "https://fabrikamb2c.b2clogin.com/fabrikamb2c.onmicrosoft.com/b2c_1_edit_profile_v2"
-        //  }
+          editProfile: {
+              authority: "https://ethanb2c.b2clogin.com/ethanb2c.onmicrosoft.com/B2C_1_edit_profile_v1"
+          }
      },
      authorityDomain: "ethanb2c.b2clogin.com"
  };
@@ -63,7 +63,7 @@
  * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/resources-and-scopes.md
  */
 export const protectedResources = {
-  todoListApi: {
+  profileApi: {
     endpoint: "https://localhost:7238/api/profile",
     scopes: ["https://ethanb2c.onmicrosoft.com/05f22c50-f8ee-48c5-bf0f-df8cfc76fda0/users.api"],
   },
