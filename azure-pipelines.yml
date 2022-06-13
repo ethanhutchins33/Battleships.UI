@@ -69,6 +69,12 @@ jobs:
         ARM_ACCESS_KEY: $(tf-access-key)
 
 # publish artifact to build folder
+    - task: DeleteFiles@1
+      displayName: 'Clean Download Folder'
+      inputs:
+        SourceFolder: '$(Pipeline.Workspace)/artifacts/dist'
+        Contents: '**/*'
+
     - task: PublishPipelineArtifact@1
       inputs:
         targetPath: '$(System.DefaultWorkingDirectory)/BattleShip_Site/SPA/BattleShips/dist/battle-ships'
