@@ -1,6 +1,5 @@
 terraform {
   backend "azurerm" {
-    resource_group_name="battleships-rg"
     storage_account_name="ehbsstorage"
     container_name="terraform-blob"
     key="terraform.tfstate"
