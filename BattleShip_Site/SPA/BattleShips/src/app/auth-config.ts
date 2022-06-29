@@ -7,6 +7,7 @@
 
 
  import { LogLevel, Configuration, BrowserCacheLocation } from '@azure/msal-browser';
+ import { environment } from 'src/environments/environment';
 
  const isIE = window.navigator.userAgent.indexOf("MSIE ") > -1 || window.navigator.userAgent.indexOf("Trident/") > -1;
  
@@ -64,7 +65,7 @@
  */
 export const protectedResources = {
   profileApi: {
-    endpoint: "https://localhost:7238/api/profile",
+    endpoint: environment.backendApiUrl,
     scopes: ["https://ethanb2c.onmicrosoft.com/05f22c50-f8ee-48c5-bf0f-df8cfc76fda0/users.api"],
   },
 }
