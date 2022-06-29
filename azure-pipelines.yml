@@ -28,7 +28,7 @@ jobs:
         corepack enable
         npm install -g @angular/cli@13.2.6
         yarn
-        ng build
+        ng build --configuration 'production'
       displayName: 'Yarn - Install Angular CLI and build app'
       workingDirectory: '$(Build.SourcesDirectory)/BattleShip_Site/SPA/BattleShips'
 
