@@ -42,7 +42,7 @@
          clientId: 'e8c1b39e-79b1-4d52-9439-58f2fb7c2f9e', // This is the ONLY mandatory field that you need to supply.
          authority: b2cPolicies.authorities.signUpSignIn.authority, // Defaults to "https://login.microsoftonline.com/common"
          knownAuthorities: [b2cPolicies.authorityDomain], // Mark your B2C tenant's domain as trusted.
-         redirectUri: '/', // Points to window.location.origin. You must register this URI on Azure portal/App Registration.
+         redirectUri: 'http://localhost:4200/', // Points to window.location.origin. You must register this URI on Azure portal/App Registration.
      },
      cache: {
          cacheLocation: BrowserCacheLocation.LocalStorage, // Configures cache location. "sessionStorage" is more secure, but "localStorage" gives you SSO between tabs.
@@ -65,7 +65,7 @@
  */
 export const protectedResources = {
   profileApi: {
-    endpoint: environment.backendApiUrl,
+    endpoint: environment.backendURL,
     scopes: ["https://ethanb2c.onmicrosoft.com/05f22c50-f8ee-48c5-bf0f-df8cfc76fda0/users.api"],
   },
 }
