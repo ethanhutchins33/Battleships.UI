@@ -16,7 +16,7 @@ export class ProfileService {
 
   profile(id: number): Observable<ProfileType>{
     console.log("Trying to get profile...");
-    return this.http.get<ProfileType>(`${environment.backendURL}/api/profiles/${id}`);
+    return this.http.get<ProfileType>(`${environment.backendApiUrl}/api/profiles/${id}`);
   }
 
 
