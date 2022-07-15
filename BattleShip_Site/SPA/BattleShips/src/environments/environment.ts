@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  backendURL: 'https://localhost:7238'
+  backendURL: 'https://localhost:7238',
+  redirectUri: 'http://localhost:4200/'
 };
 
 /*
