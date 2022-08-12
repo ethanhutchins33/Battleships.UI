@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs';
 import { ProfileService } from '../services/profile.service';
-import { ProfileType } from '../models/profile.model';
+import { Profile } from '../models/profile.model';
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me'
 
 @Component({
@@ -12,7 +10,7 @@ const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me'
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  profile!: ProfileType;
+  profile!: Profile;
 
   constructor(
     private http: HttpClient,
@@ -31,7 +29,7 @@ export class ProfileComponent implements OnInit {
   // }
 
   getProfile(): void {
-    this.profileService.profile(1).subscribe(profile => {
+    this.profileService.profile("59ce6cae-e144-46bb-aa72-1dfd67490f92").subscribe(profile => {
       this.profile = profile;
     })
   }
