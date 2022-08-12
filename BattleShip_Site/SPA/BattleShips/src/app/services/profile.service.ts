@@ -19,5 +19,4 @@ export class ProfileService {
     return this.http.get<ProfileType>(`${environment.backendApiUrl}/api/profiles/${id}`);
   }
 
-
 }
