@@ -8,23 +8,23 @@ stages:
   - stage: Package
     displayName: Build SPA
     dependsOn: []
-      jobs:
-        - job: install node
-          container: ukhydrographicoffice/terraform-azure-powershell:latest
-          steps:
-          - task: NodeTool@0
-            inputs:
-              versionSpec: '16.x'
-            displayName: 'Install Node.js'
-          - script: |
-              corepack enable
-              npm install -g @angular/cli@13.2.6
-              yarn
-              ng build --configuration 'production'
-            displayName: 'Yarn - Install Angular CLI and build app'
-            workingDirectory: '$(Build.SourcesDirectory)/SPA'
-          - task: PublishPipelineArtifact@1
-            inputs:
+    jobs:
+      - job: install-node
+        container: ukhydrographicoffice/terraform-azure-powershell:latest
+        steps:
+        - task: NodeTool@0
+          inputs:
+            versionSpec: '16.x'
+          displayName: 'Install Node.js'
+        - script: |
+            corepack enable
+            npm install -g @angular/cli@13.2.6
+            yarn
+            ng build --configuration 'production'
+          displayName: 'Yarn - Install Angular CLI and build app'
+          workingDirectory: '$(Build.SourcesDirectory)/SPA'
+        - task: PublishPipelineArtifact@1
+          inputs:
             targetPath: '$(System.DefaultWorkingDirectory)/SPA/dist/battle-ships'
             artifactType: 'pipeline'
             artifactName: 'drop'
@@ -35,39 +35,40 @@ stages:
     variables:
       - group: BattleshipsTerraformSecrets
     jobs:
-      - job: A2
-        - bash: |
-            terraform init 
-          displayName: 'terraform init'
-          workingDirectory: '$(Build.SourcesDirectory)/terraform'
-          env:
-            TF_VAR_ARM_SUBSCRIPTION_ID: $(tf-subscription-id)
-            TF_VAR_ARM_TENANT_ID: $(tf-tenant-id)
-            TF_VAR_ARM_CLIENT_ID: $(tf-client-id)
-            TF_VAR_ARM_CLIENT_SECRET: $(tf-client-secret)
-            ARM_ACCESS_KEY: $(tf-access-key)
+      - job: terraform
+        steps:
+          - bash: |
+              terraform init 
+            displayName: 'terraform init'
+            workingDirectory: '$(Build.SourcesDirectory)/terraform'
+            env:
+              TF_VAR_ARM_SUBSCRIPTION_ID: $(tf-subscription-id)
+              TF_VAR_ARM_TENANT_ID: $(tf-tenant-id)
+              TF_VAR_ARM_CLIENT_ID: $(tf-client-id)
+              TF_VAR_ARM_CLIENT_SECRET: $(tf-client-secret)
+              ARM_ACCESS_KEY: $(tf-access-key)
 
-        - bash: |
-            terraform plan -input=false -out=tfplan
-          displayName: 'terraform plan'
-          workingDirectory: '$(Build.SourcesDirectory)/terraform'
-          env:
-            TF_VAR_ARM_SUBSCRIPTION_ID: $(tf-subscription-id)
-            TF_VAR_ARM_TENANT_ID: $(tf-tenant-id)
-            TF_VAR_ARM_CLIENT_ID: $(tf-client-id)
-            TF_VAR_ARM_CLIENT_SECRET: $(tf-client-secret)
-            ARM_ACCESS_KEY: $(tf-access-key)
+          - bash: |
+              terraform plan -input=false -out=tfplan
+            displayName: 'terraform plan'
+            workingDirectory: '$(Build.SourcesDirectory)/terraform'
+            env:
+              TF_VAR_ARM_SUBSCRIPTION_ID: $(tf-subscription-id)
+              TF_VAR_ARM_TENANT_ID: $(tf-tenant-id)
+              TF_VAR_ARM_CLIENT_ID: $(tf-client-id)
+              TF_VAR_ARM_CLIENT_SECRET: $(tf-client-secret)
+              ARM_ACCESS_KEY: $(tf-access-key)
 
-        - bash: |
-            terraform apply "tfplan"
-          displayName: 'terraform apply'
-          workingDirectory: '$(Build.SourcesDirectory)/terraform'
-          env:
-            TF_VAR_ARM_SUBSCRIPTION_ID: $(tf-subscription-id)
-            TF_VAR_ARM_TENANT_ID: $(tf-tenant-id)
-            TF_VAR_ARM_CLIENT_ID: $(tf-client-id)
-            TF_VAR_ARM_CLIENT_SECRET: $(tf-client-secret)
-            ARM_ACCESS_KEY: $(tf-access-key)
+          - bash: |
+              terraform apply "tfplan"
+            displayName: 'terraform apply'
+            workingDirectory: '$(Build.SourcesDirectory)/terraform'
+            env:
+              TF_VAR_ARM_SUBSCRIPTION_ID: $(tf-subscription-id)
+              TF_VAR_ARM_TENANT_ID: $(tf-tenant-id)
+              TF_VAR_ARM_CLIENT_ID: $(tf-client-id)
+              TF_VAR_ARM_CLIENT_SECRET: $(tf-client-secret)
+              ARM_ACCESS_KEY: $(tf-access-key)
 
   - stage: Publish
     displayName: Publish project to Azure Infrastructure
@@ -75,7 +76,8 @@ stages:
     - Package
     - Infrastructure
     jobs:
-    - job: 
+    - job:
+      steps:
       - task: AzureCLI@2
         displayName: Azure CLI
         inputs:
