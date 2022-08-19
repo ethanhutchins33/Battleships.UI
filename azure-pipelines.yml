@@ -81,6 +81,9 @@ stages:
     - job:
       container: ukhydrographicoffice/terraform-azure-powershell:latest
       steps:
+      - task: DownloadPipelineArtifact@2
+        inputs:
+          artifact: drop
       - task: AzureCLI@2
         displayName: Azure CLI
         inputs:
@@ -89,4 +92,4 @@ stages:
           scriptLocation: inlineScript
           inlineScript: |
             az config set extension.use_dynamic_install=yes_without_prompt
-            az storage blob upload-batch --overwrite --destination "\$web" --source "$(System.DefaultWorkingDirectory)/SPA/dist/battle-ships" --account-name "battleshipsstaticsite"
+            az storage blob upload-batch --overwrite --destination "\$web" --source "$(Pipeline.Workspace)/drop" --account-name "battleshipsstaticsite"
