@@ -9,7 +9,7 @@ stages:
     displayName: Build SPA
     dependsOn: []
     jobs:
-      - job: install-node
+      - job: node
         container: ukhydrographicoffice/terraform-azure-powershell:latest
         steps:
         - task: NodeTool@0
