@@ -1,7 +1,9 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="white">
   <a class="title" href="/">{{ title }}</a>
 
   <div class="toolbar-spacer"></div>
+
+  <a mat-button [routerLink]="['play']">Play</a>
 
   <a mat-button [routerLink]="['profile']">Profile</a>
 

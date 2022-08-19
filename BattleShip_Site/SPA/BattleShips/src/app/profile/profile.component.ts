@@ -18,18 +18,18 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.addProfile();
     this.getProfile();
   }
 
-  // getProfile() {
-  //   this.http.get(GRAPH_ENDPOINT)
-  //   .subscribe(profile => {
-  //     this.profile = profile;
-  //   });
-  // }
-
   getProfile(): void {
-    this.profileService.profile("59ce6cae-e144-46bb-aa72-1dfd67490f92").subscribe(profile => {
+    this.profileService.getUserProfile(this.profile).subscribe(profile => {
+      this.profile = profile;
+    })
+  }
+
+  addProfile(): void {
+    this.profileService.addUserProfile(this.profile).subscribe(profile => {
       this.profile = profile;
     })
   }

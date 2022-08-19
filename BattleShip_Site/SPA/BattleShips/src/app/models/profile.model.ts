@@ -1,7 +1,7 @@
 export interface Profile {
-   id?: string,
+   id: string,
    username?: string,
    totalWins?: number,
    totalLosses?: number,
-   friendsList?: Profile
+   FriendsList?: Profile
  }
