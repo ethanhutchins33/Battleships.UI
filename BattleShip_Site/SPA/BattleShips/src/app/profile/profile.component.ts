@@ -1,14 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ProfileService } from '../services/profile.service';
+import { Profile } from '../models/profile.model';
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me'
-
-type ProfileType = {
-  givenName?: string,
-  surname?: string,
-  userPrincipalName?: string,
-  id?: string,
-};
 
 @Component({
   selector: 'app-profile',
@@ -16,20 +10,28 @@ type ProfileType = {
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  profile!: ProfileType;
+  profile!: Profile;
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private profileService: ProfileService,
   ) { }
 
   ngOnInit() {
+    this.addProfile();
     this.getProfile();
   }
 
-  getProfile() {
-    this.http.get(GRAPH_ENDPOINT)
-    .subscribe(profile => {
+  getProfile(): void {
+    this.profileService.getUserProfile(this.profile).subscribe(profile => {
       this.profile = profile;
-    });
+    })
   }
+
+  addProfile(): void {
+    this.profileService.addUserProfile(this.profile).subscribe(profile => {
+      this.profile = profile;
+    })
+  }
+  
 }

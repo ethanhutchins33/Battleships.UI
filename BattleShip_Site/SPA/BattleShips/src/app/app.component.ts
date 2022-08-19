@@ -3,6 +3,7 @@ import { MsalService, MsalBroadcastService, MSAL_GUARD_CONFIG, MsalGuardConfigur
 import { InteractionStatus, RedirectRequest } from '@azure/msal-browser';
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -36,7 +37,7 @@ export class AppComponent implements OnInit {
 
   logout() {
     this.authService.logoutRedirect({
-      postLogoutRedirectUri: 'https://battleshipsstaticsite.z6.web.core.windows.net/'
+      postLogoutRedirectUri: environment.redirectUri
     });
   }
 

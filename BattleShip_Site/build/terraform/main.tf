@@ -20,6 +20,7 @@ resource "azurerm_storage_account" "static_storage" {
 
   static_website {
     index_document = "index.html"
+    error_404_document = "index.html"
   }
 }
 
