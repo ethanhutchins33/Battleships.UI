@@ -1,87 +1,75 @@
 trigger:
   - main
 
+variables:
+  - group: BattleshipsTerraformSecrets
+
 pool:
   name: Self-Hosted
 
-stages:
-  - stage: Package
-    displayName: Build SPA
-    dependsOn: []
-      jobs:
-        - job: install node
-          container: ukhydrographicoffice/terraform-azure-powershell:latest
-          steps:
-          - task: NodeTool@0
-            inputs:
-              versionSpec: '16.x'
-            displayName: 'Install Node.js'
-          - script: |
-              corepack enable
-              npm install -g @angular/cli@13.2.6
-              yarn
-              ng build --configuration 'production'
-            displayName: 'Yarn - Install Angular CLI and build app'
-            workingDirectory: '$(Build.SourcesDirectory)/SPA'
-          - task: PublishPipelineArtifact@1
-            inputs:
-            targetPath: '$(System.DefaultWorkingDirectory)/SPA/dist/battle-ships'
-            artifactType: 'pipeline'
-            artifactName: 'drop'
-  
-  - stage: Infrastructure
-    displayName: Run Terraform Scripts
-    dependsOn: []
-    variables:
-      - group: BattleshipsTerraformSecrets
-    jobs:
-      - job: A2
-        - bash: |
-            terraform init 
-          displayName: 'terraform init'
-          workingDirectory: '$(Build.SourcesDirectory)/terraform'
-          env:
-            TF_VAR_ARM_SUBSCRIPTION_ID: $(tf-subscription-id)
-            TF_VAR_ARM_TENANT_ID: $(tf-tenant-id)
-            TF_VAR_ARM_CLIENT_ID: $(tf-client-id)
-            TF_VAR_ARM_CLIENT_SECRET: $(tf-client-secret)
-            ARM_ACCESS_KEY: $(tf-access-key)
+jobs:
+  - job: A1
+    container: ukhydrographicoffice/terraform-azure-powershell:latest
+    steps:
+      
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '16.x'
+      displayName: 'Install Node.js'
 
-        - bash: |
-            terraform plan -input=false -out=tfplan
-          displayName: 'terraform plan'
-          workingDirectory: '$(Build.SourcesDirectory)/terraform'
-          env:
-            TF_VAR_ARM_SUBSCRIPTION_ID: $(tf-subscription-id)
-            TF_VAR_ARM_TENANT_ID: $(tf-tenant-id)
-            TF_VAR_ARM_CLIENT_ID: $(tf-client-id)
-            TF_VAR_ARM_CLIENT_SECRET: $(tf-client-secret)
-            ARM_ACCESS_KEY: $(tf-access-key)
+    - script: |
+        corepack enable
+        npm install -g @angular/cli@13.2.6
+        yarn
+        ng build --configuration 'production'
+      displayName: 'Yarn - Install Angular CLI and build app'
+      workingDirectory: '$(Build.SourcesDirectory)/SPA'
 
-        - bash: |
-            terraform apply "tfplan"
-          displayName: 'terraform apply'
-          workingDirectory: '$(Build.SourcesDirectory)/terraform'
-          env:
-            TF_VAR_ARM_SUBSCRIPTION_ID: $(tf-subscription-id)
-            TF_VAR_ARM_TENANT_ID: $(tf-tenant-id)
-            TF_VAR_ARM_CLIENT_ID: $(tf-client-id)
-            TF_VAR_ARM_CLIENT_SECRET: $(tf-client-secret)
-            ARM_ACCESS_KEY: $(tf-access-key)
+    - bash: |
+        terraform init 
+      displayName: 'terraform init'
+      workingDirectory: '$(Build.SourcesDirectory)/terraform'
+      env:
+        TF_VAR_ARM_SUBSCRIPTION_ID: $(tf-subscription-id)
+        TF_VAR_ARM_TENANT_ID: $(tf-tenant-id)
+        TF_VAR_ARM_CLIENT_ID: $(tf-client-id)
+        TF_VAR_ARM_CLIENT_SECRET: $(tf-client-secret)
+        ARM_ACCESS_KEY: $(tf-access-key)
 
-  - stage: Publish
-    displayName: Publish project to Azure Infrastructure
-    dependsOn:
-    - Package
-    - Infrastructure
-    jobs:
-    - job: 
-      - task: AzureCLI@2
-        displayName: Azure CLI
-        inputs:
-          azureSubscription: Visual Studio Enterprise Subscription(a334913d-52be-4a66-9c85-c23d324393f0)
-          scriptType: bash
-          scriptLocation: inlineScript
-          inlineScript: |
-            az config set extension.use_dynamic_install=yes_without_prompt
-            az storage blob upload-batch --overwrite --destination "\$web" --source "$(System.DefaultWorkingDirectory)/SPA/dist/battle-ships" --account-name "battleshipsstaticsite"
+    - bash: |
+        terraform plan -input=false -out=tfplan
+      displayName: 'terraform plan'
+      workingDirectory: '$(Build.SourcesDirectory)/terraform'
+      env:
+        TF_VAR_ARM_SUBSCRIPTION_ID: $(tf-subscription-id)
+        TF_VAR_ARM_TENANT_ID: $(tf-tenant-id)
+        TF_VAR_ARM_CLIENT_ID: $(tf-client-id)
+        TF_VAR_ARM_CLIENT_SECRET: $(tf-client-secret)
+        ARM_ACCESS_KEY: $(tf-access-key)
+
+    - bash: |
+        terraform apply "tfplan"
+      displayName: 'terraform apply'
+      workingDirectory: '$(Build.SourcesDirectory)/terraform'
+      env:
+        TF_VAR_ARM_SUBSCRIPTION_ID: $(tf-subscription-id)
+        TF_VAR_ARM_TENANT_ID: $(tf-tenant-id)
+        TF_VAR_ARM_CLIENT_ID: $(tf-client-id)
+        TF_VAR_ARM_CLIENT_SECRET: $(tf-client-secret)
+        ARM_ACCESS_KEY: $(tf-access-key)
+
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(System.DefaultWorkingDirectory)/SPA/dist/battle-ships'
+        artifactType: 'pipeline'
+        artifactName: 'drop'
+
+    - task: AzureCLI@2
+      displayName: Azure CLI
+      inputs:
+        azureSubscription: Visual Studio Enterprise Subscription(a334913d-52be-4a66-9c85-c23d324393f0)
+        scriptType: bash
+        scriptLocation: inlineScript
+        inlineScript: |
+          az config set extension.use_dynamic_install=yes_without_prompt
+          az storage blob upload-batch --overwrite --destination "\$web" --source "$(System.DefaultWorkingDirectory)/SPA/dist/battle-ships" --account-name "battleshipsstaticsite"
