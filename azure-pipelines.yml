@@ -30,13 +30,13 @@ jobs:
         yarn
         ng build --configuration 'production'
       displayName: 'Yarn - Install Angular CLI and build app'
-      workingDirectory: '$(Build.SourcesDirectory)/BattleShips_UI/SPA'
+      workingDirectory: '$(Build.SourcesDirectory)/SPA'
 
 #Initialise terraform using manually defined project secrets (variables in Battleships Terraform Secrets). Gives terraform access and location to store .tfstate file in azure blob storage. 
     - bash: |
         terraform init 
       displayName: 'terraform init'
-      workingDirectory: '$(Build.SourcesDirectory)/BattleShips_UI/terraform'
+      workingDirectory: '$(Build.SourcesDirectory)/terraform'
       env:
         TF_VAR_ARM_SUBSCRIPTION_ID: $(tf-subscription-id)
         TF_VAR_ARM_TENANT_ID: $(tf-tenant-id)
@@ -48,7 +48,7 @@ jobs:
     - bash: |
         terraform plan -input=false -out=tfplan
       displayName: 'terraform plan'
-      workingDirectory: '$(Build.SourcesDirectory)/BattleShips_UI/terraform'
+      workingDirectory: '$(Build.SourcesDirectory)/terraform'
       env:
         TF_VAR_ARM_SUBSCRIPTION_ID: $(tf-subscription-id)
         TF_VAR_ARM_TENANT_ID: $(tf-tenant-id)
@@ -60,7 +60,7 @@ jobs:
     - bash: |
         terraform apply "tfplan"
       displayName: 'terraform apply'
-      workingDirectory: '$(Build.SourcesDirectory)/BattleShips_UI/terraform'
+      workingDirectory: '$(Build.SourcesDirectory)/terraform'
       env:
         TF_VAR_ARM_SUBSCRIPTION_ID: $(tf-subscription-id)
         TF_VAR_ARM_TENANT_ID: $(tf-tenant-id)
@@ -71,7 +71,7 @@ jobs:
 # publish artifact to build folder
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: '$(System.DefaultWorkingDirectory)/BattleShips_UI/SPA/dist/battle-ships'
+        targetPath: '$(System.DefaultWorkingDirectory)/SPA/dist/battle-ships'
         artifactType: 'pipeline'
         artifactName: 'drop'
 
@@ -83,4 +83,4 @@ jobs:
         scriptLocation: inlineScript
         inlineScript: |
           az config set extension.use_dynamic_install=yes_without_prompt
-          az storage blob upload-batch --overwrite --destination "\$web" --source "$(System.DefaultWorkingDirectory)/BattleShips_UI/SPA/dist/battle-ships" --account-name "battleshipsstaticsite"
+          az storage blob upload-batch --overwrite --destination "\$web" --source "$(System.DefaultWorkingDirectory)/SPA/dist/battle-ships" --account-name "battleshipsstaticsite"
