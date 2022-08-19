@@ -4,6 +4,9 @@ trigger:
 pool:
   name: Self-Hosted
 
+  variables:
+    - group: BattleshipsTerraformSecrets
+
 stages:
   - stage: Package
     displayName: Build SPA
@@ -31,8 +34,6 @@ stages:
   - stage: Infrastructure
     displayName: Run Terraform Scripts
     dependsOn: []
-    variables:
-      - group: BattleshipsTerraformSecrets
     jobs:
       - job: terraform
         container: ukhydrographicoffice/terraform-azure-powershell:latest
@@ -77,6 +78,7 @@ stages:
     - Infrastructure
     jobs:
     - job:
+      container: ukhydrographicoffice/terraform-azure-powershell:latest
       steps:
       - task: AzureCLI@2
         displayName: Azure CLI
