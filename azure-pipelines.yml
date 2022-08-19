@@ -10,7 +10,6 @@ stages:
     dependsOn: []
     jobs:
       - job: node
-        container: ukhydrographicoffice/terraform-azure-powershell:latest
         steps:
         - task: NodeTool@0
           inputs:
@@ -36,6 +35,7 @@ stages:
       - group: BattleshipsTerraformSecrets
     jobs:
       - job: terraform
+        container: ukhydrographicoffice/terraform-azure-powershell:latest
         steps:
           - bash: |
               terraform init 
