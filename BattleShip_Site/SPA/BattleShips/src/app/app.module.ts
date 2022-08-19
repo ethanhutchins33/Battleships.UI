@@ -3,19 +3,49 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
-import { MatButtonModule } from '@angular/material/button'
+import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
+import { MatTableModule } from '@angular/material/table';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIconModule } from '@angular/material/icon'
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 
-import { MsalModule, MsalRedirectComponent, MsalGuard, MsalInterceptor } from '@azure/msal-angular'
-import { PublicClientApplication, InteractionType } from '@azure/msal-browser';
+import { MsalModule, MsalRedirectComponent, MsalGuard, MsalInterceptor, MsalInterceptorConfiguration, MsalGuardConfiguration, MSAL_INSTANCE, MSAL_GUARD_CONFIG, MSAL_INTERCEPTOR_CONFIG, MsalService, MsalBroadcastService } from '@azure/msal-angular'
+import { PublicClientApplication, InteractionType, Configuration, IPublicClientApplication } from '@azure/msal-browser';
 
-const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
+import { msalConfig, loginRequest, protectedResources } from './auth-config';
+import { FormsModule } from '@angular/forms';
+import { ProfileService } from './services/profile.service';
+
+export function MSALInstanceFactory(): IPublicClientApplication {
+  return new PublicClientApplication(msalConfig);
+}
+
+export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
+  const protectedResourceMap = new Map<string, Array<string>>();
+
+  protectedResourceMap.set(protectedResources.profileApi.endpoint, protectedResources.profileApi.scopes);
+
+  return {
+    interactionType: InteractionType.Redirect,
+    protectedResourceMap
+  };
+}
+
+export function MSALGuardConfigFactory(): MsalGuardConfiguration {
+  return { 
+    interactionType: InteractionType.Redirect,
+    authRequest: loginRequest
+  };
+}
 
 @NgModule({
   declarations: [
@@ -30,28 +60,16 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     MatButtonModule,
     MatToolbarModule,
     MatListModule,
+    MatTableModule,
+    MatCardModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatCheckboxModule,
+    MatIconModule,
     HttpClientModule,
-    MsalModule.forRoot( new PublicClientApplication({
-      auth: {
-        clientId: 'e8c1b39e-79b1-4d52-9439-58f2fb7c2f9e', // Application (client) ID from the app registration
-        authority: 'https://login.microsoftonline.com/common', // The Azure cloud instance and the app's sign-in audience (tenant ID, common, organizations, or consumers)
-        redirectUri: 'https://battleshipsstaticsite.z6.web.core.windows.net/'// This is your redirect URI
-      },
-      cache: {
-        cacheLocation: 'localStorage',
-        storeAuthStateInCookie: isIE, // Set to true for Internet Explorer 11
-      }
-    }), {
-      interactionType: InteractionType.Redirect,
-      authRequest: {
-        scopes: ['user.read']
-      }
-    }, {
-      interactionType: InteractionType.Redirect,
-      protectedResourceMap: new Map([
-        ['https://graph.microsoft.com/v1.0/me', ['user.read']] // enter the graph endpoint here?
-      ])
-    })
+    FormsModule,
+    MsalModule,
+    MsalModule
   ],
   providers: [
     {
@@ -59,7 +77,22 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
       useClass: MsalInterceptor,
       multi: true
     },
-    MsalGuard  
+    {
+      provide: MSAL_INSTANCE,
+      useFactory: MSALInstanceFactory
+    },
+    {
+      provide: MSAL_GUARD_CONFIG,
+      useFactory: MSALGuardConfigFactory
+    },
+    {
+      provide: MSAL_INTERCEPTOR_CONFIG,
+      useFactory: MSALInterceptorConfigFactory
+    },
+    MsalService,
+    MsalGuard,
+    MsalBroadcastService,
+    ProfileService
   ],
   bootstrap: [AppComponent, MsalRedirectComponent]
 })
