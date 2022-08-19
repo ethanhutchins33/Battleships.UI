@@ -1,16 +1,9 @@
-# Node.js with Angular
-# Build a Node.js project that uses Angular.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
-
 trigger:
   - main
-  
-#import variable from azure keyvault
+
 variables:
   - group: BattleshipsTerraformSecrets
 
-#use pool named 'Self-Hosted' defined in azure devops.
 pool:
   name: Self-Hosted
 
@@ -32,7 +25,6 @@ jobs:
       displayName: 'Yarn - Install Angular CLI and build app'
       workingDirectory: '$(Build.SourcesDirectory)/SPA'
 
-#Initialise terraform using manually defined project secrets (variables in Battleships Terraform Secrets). Gives terraform access and location to store .tfstate file in azure blob storage. 
     - bash: |
         terraform init 
       displayName: 'terraform init'
@@ -44,7 +36,6 @@ jobs:
         TF_VAR_ARM_CLIENT_SECRET: $(tf-client-secret)
         ARM_ACCESS_KEY: $(tf-access-key)
 
-# terraform plan
     - bash: |
         terraform plan -input=false -out=tfplan
       displayName: 'terraform plan'
@@ -56,7 +47,6 @@ jobs:
         TF_VAR_ARM_CLIENT_SECRET: $(tf-client-secret)
         ARM_ACCESS_KEY: $(tf-access-key)
 
-# terraform apply 
     - bash: |
         terraform apply "tfplan"
       displayName: 'terraform apply'
@@ -68,7 +58,6 @@ jobs:
         TF_VAR_ARM_CLIENT_SECRET: $(tf-client-secret)
         ARM_ACCESS_KEY: $(tf-access-key)
 
-# publish artifact to build folder
     - task: PublishPipelineArtifact@1
       inputs:
         targetPath: '$(System.DefaultWorkingDirectory)/SPA/dist/battle-ships'
