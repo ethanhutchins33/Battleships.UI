@@ -17,14 +17,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home-page/home.component';
 import { ProfileComponent } from './profile-page/profile.component';
+import { GameBoardComponent } from './game-board/game-board.component';
+
+import { ProfileService } from './profile-page/profile.service';
+import { BoardService } from './game-board/board.service';
 
 import { MsalModule, MsalRedirectComponent, MsalGuard, MsalInterceptor, MsalInterceptorConfiguration, MsalGuardConfiguration, MSAL_INSTANCE, MSAL_GUARD_CONFIG, MSAL_INTERCEPTOR_CONFIG, MsalService, MsalBroadcastService } from '@azure/msal-angular'
 import { PublicClientApplication, InteractionType, Configuration, IPublicClientApplication } from '@azure/msal-browser';
 
 import { msalConfig, loginRequest, protectedResources } from './auth-config';
 import { FormsModule } from '@angular/forms';
-import { ProfileService } from './profile-page/profile.service';
-import { GameBoardComponent } from './game-board/game-board.component';
 
 export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication(msalConfig);
@@ -53,7 +55,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     AppComponent,
     HomeComponent,
     ProfileComponent,
-    GameBoardComponent
+    GameBoardComponent,
   ],
   imports: [
     BrowserModule,
@@ -94,7 +96,8 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     MsalService,
     MsalGuard,
     MsalBroadcastService,
-    ProfileService
+    ProfileService,
+    BoardService,
   ],
   bootstrap: [AppComponent, MsalRedirectComponent]
 })
