@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home-page/home.component';
 import { ProfileComponent } from './profile-page/profile.component';
 import { MsalGuard } from '@azure/msal-angular';
+import { GameBoardComponent } from './game-board/game-board.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,10 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent
+  },
+  {
+    path: 'play',
+    component: GameBoardComponent
   },
 ];
 
