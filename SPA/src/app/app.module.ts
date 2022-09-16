@@ -15,8 +15,8 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { ProfileComponent } from './profile/profile.component';
+import { HomeComponent } from './home-page/home.component';
+import { ProfileComponent } from './profile-page/profile.component';
 
 import { MsalModule, MsalRedirectComponent, MsalGuard, MsalInterceptor, MsalInterceptorConfiguration, MsalGuardConfiguration, MSAL_INSTANCE, MSAL_GUARD_CONFIG, MSAL_INTERCEPTOR_CONFIG, MsalService, MsalBroadcastService } from '@azure/msal-angular'
 import { PublicClientApplication, InteractionType, Configuration, IPublicClientApplication } from '@azure/msal-browser';
