@@ -12,31 +12,16 @@ const BOARD_SIZE: number = 7;
 })
 
 export class GameBoardComponent implements OnInit {
-
-  
-
+  board: Array<any> = [];
 
   constructor(
     private boardService: BoardService,
     ) {
-      
+        for(let i = 0; i < 7; i++){
+          this.board.push({ A: '[ ]', B: '[ ]', C: '[ ]', D: '[ ]', E: '[ ]', F: '[ ]', G: '[ ]' });
+        }
+        
      }
 
-  ngOnInit(): void {
-    let canPlay: boolean = true;
-    let player: number = 0;
-    let players: number = 0;
-    let gameId: string = "";
-    //let gameUrl: string = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port: '');
-  }
-
-  createBoard(){
-    this.boardService.createBoards(BOARD_SIZE);
-    return this;
-  }
-
-  getBoards(): Board[] {
-    return this.boardService.getBoards();
-  }
-
+  ngOnInit(): void {}
 }

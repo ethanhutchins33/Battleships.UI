@@ -1,31 +1,29 @@
-.container {
-   padding: 50px;
- }
- .battleship-tile {
-   color: black;
- }
- .win {
-   background-color: #23d160;
-   color: #fff;
- }
- .fail {
-   background-color: #ff3860;
-   color: #fff;
- }
- .content table td, .content table th {
-     border: 1px solid #dbdbdb;
-     padding: 0.5em 0.75em;
-     vertical-align: middle;
-     height: 50px;
-     text-align: center;
- }
- .content table {
-   width: 80%;
-   margin: 0 auto;
- }
- .content table tr:hover {
-     background-color: transparent;
- }
- .battleship-tile:hover {
-   cursor: pointer;
- }
+table {
+  table-layout: fixed;
+  width: 600px;
+  height: 600px;
+  background-color: grey;
+  text-align: center;
+  font-size: 50px;
+  border: 5px solid;
+}
+
+.centre {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+thead {
+  font-size: medium;
+  
+}
+
+td:hover {
+  background-color: red;
+  cursor: crosshair;
+}
+
+th {
+  background-color: black;
+  color: white;
+}
