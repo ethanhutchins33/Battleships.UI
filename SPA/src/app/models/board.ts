@@ -1,5 +1,5 @@
 import { Player } from "./player";
 export interface Board {
-   player: Player;
-   tiles: Object[];
+   //player: Player
+   tiles: string[];
 }
