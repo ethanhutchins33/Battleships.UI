@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError as handleError, tap, throwError } from 'rxjs';
-import { Profile } from '../models/profile.model';
+import { Profile } from '../../models/profile.model';
 import { environment } from 'src/environments/environment';
 //import { BrowserUtils } from '@azure/msal-browser';
 

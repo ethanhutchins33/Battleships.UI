@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home-page/home.component';
-import { ProfileComponent } from './profile-page/profile.component';
+import { HomeComponent } from './pages/home-page/home.component';
+import { ProfileComponent } from './pages/profile-page/profile.component';
 import { MsalGuard } from '@azure/msal-angular';
-import { GameBoardComponent } from './game-board/game-board.component';
+import { GameBoardComponent } from './components/game-board/game-board.component';
 
 const routes: Routes = [
   {
