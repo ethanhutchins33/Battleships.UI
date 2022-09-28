@@ -23,7 +23,7 @@ jobs:
         yarn
         ng build --configuration 'production'
       displayName: 'Yarn - Install Angular CLI and build app'
-      workingDirectory: '$(Build.SourcesDirectory)/SPA'
+      workingDirectory: '$(Build.SourcesDirectory)'
 
     - bash: |
         terraform init 
@@ -60,7 +60,7 @@ jobs:
 
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: '$(System.DefaultWorkingDirectory)/SPA/dist/battle-ships'
+        targetPath: '$(System.DefaultWorkingDirectory)/dist/battle-ships'
         artifactType: 'pipeline'
         artifactName: 'drop'
 
@@ -72,4 +72,4 @@ jobs:
         scriptLocation: inlineScript
         inlineScript: |
           az config set extension.use_dynamic_install=yes_without_prompt
-          az storage blob upload-batch --overwrite --destination "\$web" --source "$(System.DefaultWorkingDirectory)/SPA/dist/battle-ships" --account-name "battleshipsstaticsite"
+          az storage blob upload-batch --overwrite --destination "\$web" --source "$(System.DefaultWorkingDirectory)/dist/battle-ships" --account-name "battleshipsstaticsite"
