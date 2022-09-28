@@ -1,27 +1,4 @@
-
-<h3>This page is working!</h3>
-
-<table id="gameboard" class="centre">
-  <thead>
-      <tr>
-          <th>A</th>
-          <th>B</th>
-          <th>C</th>
-          <th>D</th>
-          <th>E</th>
-          <th>F</th>
-          <th>G</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr *ngFor="let row of board">
-          <td>{{row.A}}</td>
-          <td>{{row.B}}</td>
-          <td>{{row.C}}</td>
-          <td>{{row.D}}</td>
-          <td>{{row.E}}</td>
-          <td>{{row.F}}</td>
-          <td>{{row.G}}</td>
-      </tr>
-  </tbody>
-</table>
+<div class="gameRow" *ngFor="let row of board">
+    {{row.rowNumber}}
+    <app-board-cell *ngFor="let cell of row.cells" [xCoord]="cell" [yCoord]="row.rowNumber" (cellClicked)="fireTorpedo($event)"></app-board-cell>
+</div>

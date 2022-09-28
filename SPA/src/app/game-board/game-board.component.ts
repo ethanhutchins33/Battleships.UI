@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { BoardService } from './board.service';
+import { AfterViewInit, Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Board } from '../models/board';
+import { BoardCellComponent, cellClickedEvent } from '../board-cell/board-cell.component';
+import { gameRow } from '../models/gameRow';
 
 const NUM_PLAYERS: number = 2;
 const BOARD_SIZE: number = 7;
@@ -11,17 +12,32 @@ const BOARD_SIZE: number = 7;
   styleUrls: ['./game-board.component.css']
 })
 
-export class GameBoardComponent implements OnInit {
-  board: Array<any> = [];
+export class GameBoardComponent implements OnInit, AfterViewInit {
 
-  constructor(
-    private boardService: BoardService,
-    ) {
-        for(let i = 0; i < 7; i++){
-          this.board.push({ A: '[ ]', B: '[ ]', C: '[ ]', D: '[ ]', E: '[ ]', F: '[ ]', G: '[ ]' });
-        }
-        
-     }
+  @ViewChildren(BoardCellComponent) cells!: QueryList<BoardCellComponent>;
 
-  ngOnInit(): void {}
+  board: Array<gameRow> = [
+    {cells: ["A", "B", "C", "D", "E", "F", "G"], rowNumber: 1},
+    {cells: ["A", "B", "C", "D", "E", "F", "G"], rowNumber: 2},
+    {cells: ["A", "B", "C", "D", "E", "F", "G"], rowNumber: 3},
+    {cells: ["A", "B", "C", "D", "E", "F", "G"], rowNumber: 4},
+    {cells: ["A", "B", "C", "D", "E", "F", "G"], rowNumber: 5},
+    {cells: ["A", "B", "C", "D", "E", "F", "G"], rowNumber: 6},
+    {cells: ["A", "B", "C", "D", "E", "F", "G"], rowNumber: 7},
+  ];
+
+  constructor() { }
+
+  ngOnInit(): void { }
+
+  ngAfterViewInit(): void {
+    const tempCell = this.cells.find((cell) => cell.xCoord == "A" && cell.yCoord == 4);
+    if (tempCell){
+      tempCell.cellStatus = "hit";
+    }
+  }
+
+  fireTorpedo($event: cellClickedEvent) {
+    console.log($event);
+    }
 }

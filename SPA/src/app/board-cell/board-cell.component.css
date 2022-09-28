@@ -1,0 +1,16 @@
+.game-cell {
+   height: 50px;
+   width: 50px;
+}
+
+.missed {
+   background-color: grey;
+}
+
+.hit {
+   background-color: red;
+}
+
+.hidden {
+   background-color: blue;
+}

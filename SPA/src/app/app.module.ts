@@ -27,6 +27,7 @@ import { PublicClientApplication, InteractionType, Configuration, IPublicClientA
 
 import { msalConfig, loginRequest, protectedResources } from './auth-config';
 import { FormsModule } from '@angular/forms';
+import { BoardCellComponent } from './board-cell/board-cell.component';
 
 export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication(msalConfig);
@@ -56,6 +57,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     HomeComponent,
     ProfileComponent,
     GameBoardComponent,
+    BoardCellComponent,
   ],
   imports: [
     BrowserModule,
