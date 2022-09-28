@@ -15,19 +15,19 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home-page/home.component';
-import { ProfileComponent } from './profile-page/profile.component';
-import { GameBoardComponent } from './game-board/game-board.component';
+import { HomeComponent } from './pages/home-page/home.component';
+import { ProfileComponent } from './pages/profile-page/profile.component';
+import { GameBoardComponent } from './components/game-board/game-board.component';
 
-import { ProfileService } from './profile-page/profile.service';
-import { BoardService } from './game-board/board.service';
+import { ProfileService } from './pages/profile-page/profile.service';
+import { BoardService } from './components/game-board/board.service';
 
 import { MsalModule, MsalRedirectComponent, MsalGuard, MsalInterceptor, MsalInterceptorConfiguration, MsalGuardConfiguration, MSAL_INSTANCE, MSAL_GUARD_CONFIG, MSAL_INTERCEPTOR_CONFIG, MsalService, MsalBroadcastService } from '@azure/msal-angular'
 import { PublicClientApplication, InteractionType, Configuration, IPublicClientApplication } from '@azure/msal-browser';
 
 import { msalConfig, loginRequest, protectedResources } from './auth-config';
 import { FormsModule } from '@angular/forms';
-import { BoardCellComponent } from './board-cell/board-cell.component';
+import { BoardCellComponent } from './components/board-cell/board-cell.component';
 
 export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication(msalConfig);

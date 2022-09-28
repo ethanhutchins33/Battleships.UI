@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { cellStatus } from '../models/cellStatus';
+import { cellStatus } from '../../models/cellStatus';
 
 @Component({
   selector: 'app-board-cell',

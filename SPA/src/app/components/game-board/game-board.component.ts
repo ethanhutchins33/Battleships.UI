@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { Board } from '../models/board';
+import { Board } from '../../models/board';
 import { BoardCellComponent, cellClickedEvent } from '../board-cell/board-cell.component';
-import { gameRow } from '../models/gameRow';
+import { gameRow } from '../../models/gameRow';
 
 const NUM_PLAYERS: number = 2;
 const BOARD_SIZE: number = 7;
