@@ -1,0 +1,1 @@
+export type cellStatus = "hit"|"hidden"|"missed"

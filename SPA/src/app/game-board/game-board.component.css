@@ -27,3 +27,7 @@ th {
   background-color: black;
   color: white;
 }
+
+.gameRow {
+  display: flex;
+}
