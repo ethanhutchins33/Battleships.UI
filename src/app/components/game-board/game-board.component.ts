@@ -1,5 +1,4 @@
 import { AfterViewInit, Component, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { Board } from '../../models/board';
 import { BoardCellComponent, cellClickedEvent } from '../board-cell/board-cell.component';
 import { gameRow } from '../../models/gameRow';
 
