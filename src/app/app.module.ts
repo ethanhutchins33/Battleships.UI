@@ -17,6 +17,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home-page/home.component';
 import { ProfileComponent } from './pages/profile-page/profile.component';
+import { PlayComponent } from './pages/play-page/play.component';
 import { GameBoardComponent } from './components/game-board/game-board.component';
 
 import { ProfileService } from './pages/profile-page/profile.service';
@@ -58,6 +59,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     ProfileComponent,
     GameBoardComponent,
     BoardCellComponent,
+    PlayComponent,
   ],
   imports: [
     BrowserModule,
