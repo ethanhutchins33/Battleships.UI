@@ -1,4 +1,4 @@
 export interface gameRow {
-   cells: Array<any>;
+   cells: Array<string>;
    rowNumber: number;
 }
