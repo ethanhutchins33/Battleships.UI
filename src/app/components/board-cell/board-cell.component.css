@@ -8,9 +8,9 @@
 }
 
 .hit {
-   background-color: red;
+   background-color: rgb(253, 92, 92);
 }
 
 .hidden {
-   background-color: blue;
+   background-color: rgb(93, 93, 250);
 }
