@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { cellStatus } from 'src/app/models/cellStatus';
-import { cellClickedEvent } from '../board-cell/board-cell.component';
+import { cellClickedEvent } from 'src/app/models/cellClickedEvent';
 
 @Injectable({
   providedIn: 'root'

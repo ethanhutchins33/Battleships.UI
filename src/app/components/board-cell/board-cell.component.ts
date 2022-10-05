@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { cellStatus } from '../../models/cellStatus';
+import { cellClickedEvent } from 'src/app/models/cellClickedEvent';
 
 @Component({
   selector: 'app-board-cell',
@@ -7,8 +8,6 @@ import { cellStatus } from '../../models/cellStatus';
   styleUrls: ['./board-cell.component.css']
 })
 export class BoardCellComponent implements OnInit {
-
-
 
   constructor() { }
 
@@ -20,13 +19,7 @@ export class BoardCellComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
   onClick(): void {
     this.cellClicked.emit({X: this.xCoord, Y: this.yCoord})
   }
-}
-
-export interface cellClickedEvent {
-  X: string;
-  Y: number;
 }
