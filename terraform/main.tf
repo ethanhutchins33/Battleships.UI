@@ -1,9 +1,3 @@
-#define main terraform modules
-
-
-
-
-#create resource group
 resource "azurerm_resource_group" "rg" {
   name     = "battleship_terraform_rg"
   location = "westeurope"
@@ -23,11 +17,3 @@ resource "azurerm_storage_account" "static_storage" {
     error_404_document = "index.html"
   }
 }
-
-#SQL SERVER
-
-
-#BLOB STORAGE
-
-
-#AZURE FUNCTIONS?

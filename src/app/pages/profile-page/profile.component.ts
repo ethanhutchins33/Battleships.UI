@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ProfileService } from '../services/profile.service';
-import { Profile } from '../models/profile.model';
+import { ProfileService } from './profile.service';
+import { Profile } from '../../models/profile.model';
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me'
 
 @Component({
