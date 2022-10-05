@@ -3,14 +3,14 @@
    width: 70px;
 }
 
-.missed {
+.hidden {
    background-color: grey;
 }
 
-.hit {
+.missed {
    background-color: rgb(253, 92, 92);
 }
 
-.hidden {
+.hit {
    background-color: rgb(93, 93, 250);
 }
