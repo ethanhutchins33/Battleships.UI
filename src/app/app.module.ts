@@ -21,7 +21,7 @@ import { PlayComponent } from './pages/play-page/play.component';
 import { GameBoardComponent } from './components/game-board/game-board.component';
 
 import { ProfileService } from './pages/profile-page/profile.service';
-import { BoardService } from './components/game-board/board.service';
+import { BoardService } from './pages/play-page/board.service';
 
 import { MsalModule, MsalRedirectComponent, MsalGuard, MsalInterceptor, MsalInterceptorConfiguration, MsalGuardConfiguration, MSAL_INSTANCE, MSAL_GUARD_CONFIG, MSAL_INTERCEPTOR_CONFIG, MsalService, MsalBroadcastService } from '@azure/msal-angular'
 import { PublicClientApplication, InteractionType, Configuration, IPublicClientApplication } from '@azure/msal-browser';
