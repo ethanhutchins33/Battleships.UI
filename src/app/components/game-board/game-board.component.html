@@ -1,0 +1,4 @@
+<div class="gameRow" *ngFor="let row of board">
+    {{row.rowNumber}}
+    <app-board-cell *ngFor="let cell of row.cells" [xCoord]="cell" [yCoord]="row.rowNumber" (cellClicked)="fireTorpedo($event)"></app-board-cell>
+</div>
