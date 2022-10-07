@@ -13,7 +13,7 @@ export class BoardCellComponent implements OnInit {
 
   @Input() xCoord: string = "";
   @Input() yCoord: number = 0;
-  @Input() cellStatus: cellStatus = "hidden";
+  @Input() cellStatus: cellStatus = new cellStatus;
   @Output() cellClicked: EventEmitter<cellClickedEvent> = new EventEmitter<cellClickedEvent>();
 
   ngOnInit(): void {

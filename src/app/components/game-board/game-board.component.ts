@@ -43,8 +43,11 @@ export class GameBoardComponent implements OnInit, AfterViewInit {
   fireTorpedo($event: cellClickedEvent) {
     console.log($event);
     const tempCell = this.cells.find((cell) => cell.xCoord == $event.X && cell.yCoord == $event.Y);
+    
     if (tempCell){
-      tempCell.cellStatus = this.gameservice.shotFired($event);
+      this.gameservice.shotFired($event).subscribe(result => {
+        tempCell.cellStatus = result;
+      })
     }
   }
 
