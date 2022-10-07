@@ -65,7 +65,7 @@
  */
 export const protectedResources = {
   profileApi: {
-    endpoint: environment.backendApiUrl,
+    endpoint: environment.BattleShipsUsersApiUrl,
     scopes: ["https://ethanb2c.onmicrosoft.com/05f22c50-f8ee-48c5-bf0f-df8cfc76fda0/users.api"],
   },
 }

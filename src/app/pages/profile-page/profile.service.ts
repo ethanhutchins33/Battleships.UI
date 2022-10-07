@@ -12,12 +12,12 @@ import { environment } from 'src/environments/environment';
 export class ProfileService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
     ) { }
 
   getUserProfile(user: Profile): Observable<Profile>{
     console.log("Trying to get profile...");
-    return this.http.get<Profile>(`${environment.backendApiUrl}/api/profile`)
+    return this.http.get<Profile>(`${environment.BattleShipsUsersApiUrl}/api/profile`)
     .pipe(
       handleError(this.handleError('getUserProfile', user))
     );
@@ -25,7 +25,7 @@ export class ProfileService {
 
   addUserProfile(user: Profile): Observable<Profile>{
     console.log("Adding new user to the DB...");
-    return this.http.post<Profile>(`${environment.backendApiUrl}/api/profile`, user)
+    return this.http.post<Profile>(`${environment.BattleShipsUsersApiUrl}/api/profile`, user)
     .pipe(
       handleError(this.handleError('addUserProfile', user))
     );
