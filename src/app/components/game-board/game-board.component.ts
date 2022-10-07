@@ -33,12 +33,7 @@ export class GameBoardComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void { }
 
-  ngAfterViewInit(): void {
-    // const tempCell = this.cells.find((cell) => cell.xCoord == "A" && cell.yCoord == 4);
-    // if (tempCell){
-    //   tempCell.cellStatus = "hit";
-    // }
-  }
+  ngAfterViewInit(): void { }
 
   fireTorpedo($event: cellClickedEvent) {
     console.log($event);
