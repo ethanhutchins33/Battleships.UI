@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlayComponent implements OnInit {
 
-  constructor() { }
+  createNewGame() {
+    //_gameService.createGame();
+  }
+
+  public gameStarted: boolean;
+
+  constructor() {
+    this.gameStarted = false; 
+  }
 
   ngOnInit(): void {
+    
   }
 
 }

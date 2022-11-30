@@ -1,3 +1,9 @@
-<div class="centre">
+
+<div class="centre" *ngIf="!gameStarted">
+   <button mat-button (click)="createNewGame()">Create New Game</button>
+</div>
+
+<div class="centre" *ngIf="gameStarted">
    <app-game-board></app-game-board>
 </div>
+
