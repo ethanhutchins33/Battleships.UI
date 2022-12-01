@@ -1,4 +1,4 @@
 export interface cellClickedEvent {
-   X: string;
-   Y: number;
- }
+  X: string;
+  Y: number;
+}

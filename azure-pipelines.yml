@@ -11,65 +11,64 @@ jobs:
   - job: A1
     container: ukhydrographicoffice/terraform-azure-powershell:latest
     steps:
-      
-    - task: NodeTool@0
-      inputs:
-        versionSpec: '16.x'
-      displayName: 'Install Node.js'
+      - task: NodeTool@0
+        inputs:
+          versionSpec: "16.x"
+        displayName: "Install Node.js"
 
-    - script: |
-        corepack enable
-        npm install -g @angular/cli@13.2.6
-        yarn
-        ng build --configuration 'production'
-      displayName: 'Yarn - Install Angular CLI and build app'
-      workingDirectory: '$(Build.SourcesDirectory)'
+      - script: |
+          corepack enable
+          npm install -g @angular/cli@13.2.6
+          yarn
+          ng build --configuration 'production'
+        displayName: "Yarn - Install Angular CLI and build app"
+        workingDirectory: "$(Build.SourcesDirectory)"
 
-    - bash: |
-        terraform init 
-      displayName: 'terraform init'
-      workingDirectory: '$(Build.SourcesDirectory)/terraform'
-      env:
-        TF_VAR_ARM_SUBSCRIPTION_ID: $(tf-subscription-id)
-        TF_VAR_ARM_TENANT_ID: $(tf-tenant-id)
-        TF_VAR_ARM_CLIENT_ID: $(tf-client-id)
-        TF_VAR_ARM_CLIENT_SECRET: $(tf-client-secret)
-        ARM_ACCESS_KEY: $(tf-access-key)
+      - bash: |
+          terraform init
+        displayName: "terraform init"
+        workingDirectory: "$(Build.SourcesDirectory)/terraform"
+        env:
+          TF_VAR_ARM_SUBSCRIPTION_ID: $(tf-subscription-id)
+          TF_VAR_ARM_TENANT_ID: $(tf-tenant-id)
+          TF_VAR_ARM_CLIENT_ID: $(tf-client-id)
+          TF_VAR_ARM_CLIENT_SECRET: $(tf-client-secret)
+          ARM_ACCESS_KEY: $(tf-access-key)
 
-    - bash: |
-        terraform plan -input=false -out=tfplan
-      displayName: 'terraform plan'
-      workingDirectory: '$(Build.SourcesDirectory)/terraform'
-      env:
-        TF_VAR_ARM_SUBSCRIPTION_ID: $(tf-subscription-id)
-        TF_VAR_ARM_TENANT_ID: $(tf-tenant-id)
-        TF_VAR_ARM_CLIENT_ID: $(tf-client-id)
-        TF_VAR_ARM_CLIENT_SECRET: $(tf-client-secret)
-        ARM_ACCESS_KEY: $(tf-access-key)
+      - bash: |
+          terraform plan -input=false -out=tfplan
+        displayName: "terraform plan"
+        workingDirectory: "$(Build.SourcesDirectory)/terraform"
+        env:
+          TF_VAR_ARM_SUBSCRIPTION_ID: $(tf-subscription-id)
+          TF_VAR_ARM_TENANT_ID: $(tf-tenant-id)
+          TF_VAR_ARM_CLIENT_ID: $(tf-client-id)
+          TF_VAR_ARM_CLIENT_SECRET: $(tf-client-secret)
+          ARM_ACCESS_KEY: $(tf-access-key)
 
-    - bash: |
-        terraform apply "tfplan"
-      displayName: 'terraform apply'
-      workingDirectory: '$(Build.SourcesDirectory)/terraform'
-      env:
-        TF_VAR_ARM_SUBSCRIPTION_ID: $(tf-subscription-id)
-        TF_VAR_ARM_TENANT_ID: $(tf-tenant-id)
-        TF_VAR_ARM_CLIENT_ID: $(tf-client-id)
-        TF_VAR_ARM_CLIENT_SECRET: $(tf-client-secret)
-        ARM_ACCESS_KEY: $(tf-access-key)
+      - bash: |
+          terraform apply "tfplan"
+        displayName: "terraform apply"
+        workingDirectory: "$(Build.SourcesDirectory)/terraform"
+        env:
+          TF_VAR_ARM_SUBSCRIPTION_ID: $(tf-subscription-id)
+          TF_VAR_ARM_TENANT_ID: $(tf-tenant-id)
+          TF_VAR_ARM_CLIENT_ID: $(tf-client-id)
+          TF_VAR_ARM_CLIENT_SECRET: $(tf-client-secret)
+          ARM_ACCESS_KEY: $(tf-access-key)
 
-    - task: PublishPipelineArtifact@1
-      inputs:
-        targetPath: '$(System.DefaultWorkingDirectory)/dist/battle-ships'
-        artifactType: 'pipeline'
-        artifactName: 'drop'
+      - task: PublishPipelineArtifact@1
+        inputs:
+          targetPath: "$(System.DefaultWorkingDirectory)/dist/battle-ships"
+          artifactType: "pipeline"
+          artifactName: "drop"
 
-    - task: AzureCLI@2
-      displayName: Azure CLI
-      inputs:
-        azureSubscription: Visual Studio Enterprise Subscription(a334913d-52be-4a66-9c85-c23d324393f0)
-        scriptType: bash
-        scriptLocation: inlineScript
-        inlineScript: |
-          az config set extension.use_dynamic_install=yes_without_prompt
-          az storage blob upload-batch --overwrite --destination "\$web" --source "$(System.DefaultWorkingDirectory)/dist/battle-ships" --account-name "battleshipsstaticsite"
+      - task: AzureCLI@2
+        displayName: Azure CLI
+        inputs:
+          azureSubscription: Visual Studio Enterprise Subscription(a334913d-52be-4a66-9c85-c23d324393f0)
+          scriptType: bash
+          scriptLocation: inlineScript
+          inlineScript: |
+            az config set extension.use_dynamic_install=yes_without_prompt
+            az storage blob upload-batch --overwrite --destination "\$web" --source "$(System.DefaultWorkingDirectory)/dist/battle-ships" --account-name "battleshipsstaticsite"

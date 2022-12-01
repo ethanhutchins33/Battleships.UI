@@ -7,20 +7,19 @@ import { environment } from 'src/environments/environment';
 import { CreateGameResponseDto } from 'src/app/RequestDto/CreateGameResponseDto';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BoardService {
-  constructor(
-    private http: HttpClient,
-  ) { }
+  constructor(private http: HttpClient) {}
 
   // createGame(): Observable<CreateGameResponseDto> {
   //   return this.http.post<CreateGameResponseDto>(`${environment.BattleShipsGameApiUrl}/api/create`);
   // }
 
   shotFired($event: cellClickedEvent): Observable<cellStatus> {
-    console.log("Firing shot...");
-    return this.http.get<cellStatus>(`${environment.BattleShipsGameApiUrl}/api/shoot`);
+    console.log('Firing shot...');
+    return this.http.get<cellStatus>(
+      `${environment.BattleShipsGameApiUrl}/api/shoot`
+    );
   }
-
 }

@@ -7,28 +7,23 @@ import { environment } from 'src/environments/environment';
 //import { BrowserUtils } from '@azure/msal-browser';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProfileService {
+  constructor(private http: HttpClient) {}
 
-  constructor(
-    private http: HttpClient,
-    ) { }
-
-  getUserProfile(user: Profile): Observable<Profile>{
-    console.log("Trying to get profile...");
-    return this.http.get<Profile>(`${environment.BattleShipsUsersApiUrl}/api/profile`)
-    .pipe(
-      handleError(this.handleError('getUserProfile', user))
-    );
+  getUserProfile(user: Profile): Observable<Profile> {
+    console.log('Trying to get profile...');
+    return this.http
+      .get<Profile>(`${environment.BattleShipsUsersApiUrl}/api/profile`)
+      .pipe(handleError(this.handleError('getUserProfile', user)));
   }
 
-  addUserProfile(user: Profile): Observable<Profile>{
-    console.log("Adding new user to the DB...");
-    return this.http.post<Profile>(`${environment.BattleShipsUsersApiUrl}/api/profile`, user)
-    .pipe(
-      handleError(this.handleError('addUserProfile', user))
-    );
+  addUserProfile(user: Profile): Observable<Profile> {
+    console.log('Adding new user to the DB...');
+    return this.http
+      .post<Profile>(`${environment.BattleShipsUsersApiUrl}/api/profile`, user)
+      .pipe(handleError(this.handleError('addUserProfile', user)));
   }
 
   /**
@@ -38,7 +33,7 @@ export class ProfileService {
    * @param operation - name of the operation that failed
    * @param result - optional value to return as the observable result
    */
-   private handleError<T>(operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       // TODO: send the error to remote logging infrastructure
       console.error(error);
@@ -50,5 +45,4 @@ export class ProfileService {
       return of(result as T);
     };
   }
-
 }

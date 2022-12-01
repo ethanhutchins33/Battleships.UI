@@ -5,21 +5,20 @@ import { cellClickedEvent } from 'src/app/models/cellClickedEvent';
 @Component({
   selector: 'app-board-cell',
   templateUrl: './board-cell.component.html',
-  styleUrls: ['./board-cell.component.css']
+  styleUrls: ['./board-cell.component.css'],
 })
 export class BoardCellComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  @Input() xCoord: string = "";
+  @Input() xCoord: string = '';
   @Input() yCoord: number = 0;
-  @Input() cellStatus: cellStatus = new cellStatus;
-  @Output() cellClicked: EventEmitter<cellClickedEvent> = new EventEmitter<cellClickedEvent>();
+  @Input() cellStatus: cellStatus = new cellStatus();
+  @Output() cellClicked: EventEmitter<cellClickedEvent> =
+    new EventEmitter<cellClickedEvent>();
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onClick(): void {
-    this.cellClicked.emit({X: this.xCoord, Y: this.yCoord})
+    this.cellClicked.emit({ X: this.xCoord, Y: this.yCoord });
   }
 }
