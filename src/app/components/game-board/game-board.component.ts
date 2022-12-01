@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { BoardCellComponent } from '../board-cell/board-cell.component';
 import { gameRow } from '../../models/gameRow';
-import { BoardService } from 'src/app/pages/play-page/board.service';
+import { BoardService } from 'src/app/services/board.service';
 import { cellClickedEvent } from 'src/app/models/cellClickedEvent';
 
 const NUM_PLAYERS: number = 2;

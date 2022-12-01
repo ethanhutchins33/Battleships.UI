@@ -20,8 +20,8 @@ import { ProfileComponent } from './pages/profile-page/profile.component';
 import { PlayComponent } from './pages/play-page/play.component';
 import { GameBoardComponent } from './components/game-board/game-board.component';
 
-import { ProfileService } from './pages/profile-page/profile.service';
-import { BoardService } from './pages/play-page/board.service';
+import { ProfileService } from 'src/app/services/profile.service';
+import { BoardService } from 'src/app/services/board.service';
 
 import {
   MsalModule,

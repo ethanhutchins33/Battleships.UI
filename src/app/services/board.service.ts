@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { CreateGameResponseDto } from 'src/app/RequestDto/CreateGameResponseDto';
+import { Player } from 'src/app/models/player';
 
 @Injectable({
   providedIn: 'root',
@@ -12,8 +13,18 @@ import { CreateGameResponseDto } from 'src/app/RequestDto/CreateGameResponseDto'
 export class BoardService {
   constructor(private http: HttpClient) {}
 
-  // createGame(): Observable<CreateGameResponseDto> {
-  //   return this.http.post<CreateGameResponseDto>(`${environment.BattleShipsGameApiUrl}/api/create`);
+  createGame(player: Player): Observable<CreateGameResponseDto> {
+    return this.http.post<CreateGameResponseDto>(
+      `${environment.BattleShipsGameApiUrl}/api/create`,
+      player.id
+    );
+  }
+
+  // addHero(hero: Hero): Observable<Hero> {
+  //   return this.http.post<Hero>(this.heroesUrl, hero, httpOptions)
+  //     .pipe(
+  //       catchError(this.handleError('addHero', hero))
+  //     );
   // }
 
   shotFired($event: cellClickedEvent): Observable<cellStatus> {
