@@ -1,3 +1,3 @@
-export class CreateGameResponseDto{
-   public gameId!: number;
+export class CreateGameResponseDto {
+  public gameId!: number;
 }

@@ -3,10 +3,9 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-play',
   templateUrl: './play.component.html',
-  styleUrls: ['./play.component.css']
+  styleUrls: ['./play.component.css'],
 })
 export class PlayComponent implements OnInit {
-
   createNewGame() {
     //_gameService.createGame();
   }
@@ -14,11 +13,8 @@ export class PlayComponent implements OnInit {
   public gameStarted: boolean;
 
   constructor() {
-    this.gameStarted = false; 
+    this.gameStarted = false;
   }
 
-  ngOnInit(): void {
-    
-  }
-
+  ngOnInit(): void {}
 }

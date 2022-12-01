@@ -1,3 +1,3 @@
 export class cellStatus {
-   status: string = "hidden";
+  status: string = 'hidden';
 }

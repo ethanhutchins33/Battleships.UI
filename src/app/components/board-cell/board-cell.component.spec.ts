@@ -8,9 +8,8 @@ describe('BoardCellComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BoardCellComponent ]
-    })
-    .compileComponents();
+      declarations: [BoardCellComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
