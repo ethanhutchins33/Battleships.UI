@@ -4,7 +4,7 @@ import { cellClickedEvent } from 'src/app/models/cellClickedEvent';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { CreateGameResponseDto } from 'src/app/RequestDto/CreateGameResponseDto';
+import { CreateGameResponseDto } from 'src/app/requests/CreateGameResponseDto';
 import { Player } from 'src/app/models/player';
 
 @Injectable({
