@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ProfileService } from '../../services/profile.service';
+import { BoardService } from '../../services/board.service';
 
 @Component({
   selector: 'app-play',
@@ -6,15 +8,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./play.component.css'],
 })
 export class PlayComponent implements OnInit {
-  createNewGame() {
-    //_gameService.createGame();
-  }
-
   public gameStarted: boolean;
+  private _boardService: BoardService;
+  private _profileService: ProfileService;
 
-  constructor() {
+  constructor(boardService: BoardService, profileService: ProfileService) {
     this.gameStarted = false;
+    this._boardService = boardService;
+    this._profileService = profileService;
   }
 
   ngOnInit(): void {}
+
+  createNewGame() {
+    //this._boardService.createGame(this._profileService.getUserProfile());
+  }
 }
