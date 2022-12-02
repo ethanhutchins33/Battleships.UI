@@ -39,7 +39,6 @@ import {
 import {
   PublicClientApplication,
   InteractionType,
-  Configuration,
   IPublicClientApplication,
 } from '@azure/msal-browser';
 
