@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
-  backendApiUrl: 'https://battleships-users-web-api.azurewebsites.net',
-  redirectUri: 'https://battleshipsstaticsite.z6.web.core.windows.net/'
+  redirectUri: 'https://battleshipsstaticsite.z6.web.core.windows.net/',
+  BattleShipsUsersApiUrl: 'https://battleships-users-web-api.azurewebsites.net',
+  BattleShipsGameApiUrl: '',
 };
