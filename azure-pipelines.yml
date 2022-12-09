@@ -2,7 +2,7 @@ trigger:
   - main
 
 variables:
-  - group: BattleshipsTerraformSecrets
+  - group: BattleshipsSecrets
 
 pool:
   name: Self-Hosted
