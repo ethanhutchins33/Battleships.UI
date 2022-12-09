@@ -1,2 +1,3 @@
-
-<div class="board-cell" [ngClass]="cellStatus" (click)="onClick()">{{cellStatus}}</div>
+<div class="board-cell" [ngClass]="cellStatus.status" (click)="onClick()">
+  {{ cellStatus.status }}
+</div>
