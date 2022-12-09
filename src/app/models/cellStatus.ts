@@ -1,1 +1,3 @@
-export type cellStatus = "hit"|"hidden"|"missed"
+export class cellStatus {
+  status: string = 'hidden';
+}

@@ -3,31 +3,32 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home-page/home.component';
 import { ProfileComponent } from './pages/profile-page/profile.component';
 import { MsalGuard } from '@azure/msal-angular';
-import { GameBoardComponent } from './components/game-board/game-board.component';
 import { PlayComponent } from './pages/play-page/play.component';
 
 const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
-    canActivate: [MsalGuard]
+    canActivate: [MsalGuard],
   },
   {
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
   },
   {
     path: 'play',
-    component: PlayComponent
+    component: PlayComponent,
   },
 ];
 
 const isIframe = window !== window.parent && !window.opener;
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    initialNavigation: !isIframe ? 'enabled' : 'disabled'
-  })],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes, {
+      initialNavigation: !isIframe ? 'enabled' : 'disabled',
+    }),
+  ],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

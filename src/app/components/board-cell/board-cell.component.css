@@ -1,16 +1,16 @@
 .board-cell {
-   height: 70px;
-   width: 70px;
-}
-
-.missed {
-   background-color: grey;
-}
-
-.hit {
-   background-color: red;
+  height: 70px;
+  width: 70px;
 }
 
 .hidden {
-   background-color: blue;
+  background-color: grey;
+}
+
+.missed {
+  background-color: rgb(253, 92, 92);
+}
+
+.hit {
+  background-color: rgb(93, 93, 250);
 }
