@@ -72,7 +72,7 @@ export const msalConfig: Configuration = {
  */
 export const protectedResources = {
   profileApi: {
-    endpoint: environment.BattleShipsUsersApiUrl,
+    endpoint: environment.BattleShipsApiUrl,
     scopes: [
       'https://ethanb2c.onmicrosoft.com/05f22c50-f8ee-48c5-bf0f-df8cfc76fda0/users.api',
     ],

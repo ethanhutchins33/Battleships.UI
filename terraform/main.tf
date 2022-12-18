@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "rg" {
-  name     = "battleship_terraform_rg"
+  name     = "battleship_ui_rg"
   location = "westeurope"
 }
 
