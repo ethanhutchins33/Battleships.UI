@@ -15,14 +15,14 @@ export class ProfileService {
   getUserProfile(user: Profile): Observable<Profile> {
     console.log('Trying to get profile...');
     return this.http
-      .get<Profile>(`${environment.BattleShipsUsersApiUrl}/api/profile`)
+      .get<Profile>(`${environment.BattleShipsApiUrl}/player/get`)
       .pipe(handleError(this.handleError('getUserProfile', user)));
   }
 
   addUserProfile(user: Profile): Observable<Profile> {
     console.log('Adding new user to the DB...');
     return this.http
-      .post<Profile>(`${environment.BattleShipsUsersApiUrl}/api/profile`, user)
+      .post<Profile>(`${environment.BattleShipsApiUrl}/player/add`, user)
       .pipe(handleError(this.handleError('addUserProfile', user)));
   }
 

@@ -15,7 +15,7 @@ export class BoardService {
 
   createGame(player: Player): Observable<CreateGameResponseDto> {
     return this.http.post<CreateGameResponseDto>(
-      `${environment.BattleShipsGameApiUrl}/api/create`,
+      `${environment.BattleShipsApiUrl}/game/create`,
       player.id
     );
   }
@@ -28,9 +28,9 @@ export class BoardService {
   // }
 
   shotFired($event: cellClickedEvent): Observable<cellStatus> {
-    console.log('Firing shot...');
+    console.log('Joining Game');
     return this.http.get<cellStatus>(
-      `${environment.BattleShipsGameApiUrl}/api/shoot`
+      `${environment.BattleShipsApiUrl}/game/join`
     );
   }
 }
