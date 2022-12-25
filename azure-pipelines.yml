@@ -56,12 +56,9 @@ jobs:
           TF_VAR_ARM_CLIENT_ID: $(tf-client-id)
           TF_VAR_ARM_CLIENT_SECRET: $(tf-client-secret)
           ARM_ACCESS_KEY: $(tf-access-key)
-
-      - task: PublishPipelineArtifact@1
-        inputs:
-          targetPath: "$(System.DefaultWorkingDirectory)/dist/battle-ships"
-          artifactType: "pipeline"
-          artifactName: "drop"
+        
+      - publish: "$(System.DefaultWorkingDirectory)/dist/battle-ships"
+        artifact: drop
 
       - task: AzureCLI@2
         displayName: Azure CLI
