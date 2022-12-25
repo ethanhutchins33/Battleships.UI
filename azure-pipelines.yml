@@ -56,7 +56,7 @@ jobs:
           TF_VAR_ARM_CLIENT_ID: $(tf-client-id)
           TF_VAR_ARM_CLIENT_SECRET: $(tf-client-secret)
           ARM_ACCESS_KEY: $(tf-access-key)
-        
+
       - publish: "$(System.DefaultWorkingDirectory)/dist/battle-ships"
         artifact: drop
 
@@ -69,3 +69,36 @@ jobs:
           inlineScript: |
             az config set extension.use_dynamic_install=yes_without_prompt
             az storage blob upload-batch --overwrite --destination "\$web" --source "$(System.DefaultWorkingDirectory)/dist/battle-ships" --account-name "battleshipsstaticsite"
+
+      - bash: cd $(Pipeline.Workspace); echo $(ls)
+
+      - bash: cd $(Pipeline.Workspace)/app; echo $(ls)
+
+      # - task: AzureStaticWebApp@0
+      #   inputs:
+      #     workingDirectory: "$(System.DefaultWorkingDirectory)/dist/battle-ships"
+      #     app_location: "/"
+      #     #app_build_command: # string. App build command.
+      #     #output_location: # string. Output location.
+      #     #api_location: # string. Api location.
+      #     #api_build_command: # string. Api build command.
+      #     #routes_location: # string. Routes location.
+      #     #config_file_location: # string. Config file location.
+      #     #skip_app_build: # boolean. Skip app build.
+      #     #skip_api_build: # boolean. Skip api build.
+      #     #is_static_export: # boolean. Set static export.
+      #     #verbose: # boolean. Verbose.
+      #     #build_timeout_in_minutes: # string. Build timeout in minutes.
+      #     #azure_static_web_apps_api_token: # string. Azure Static Web Apps api token.
+      #     #deployment_environment: # string. Deployment Environment.
+      #     #production_branch: # string. Production Branch.
+
+      # - task: AzureStaticWebApp@0
+      #   inputs:
+      #     workingDirectory: "$(Pipeline.Workspace)"
+      #     app_location: "/"
+      #     skip_app_build: true
+      #     skip_api_build: true
+      #     verbose: true
+      #   env:
+      #     azure_static_web_apps_api_token: "$(deployment_token)"
