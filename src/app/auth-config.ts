@@ -71,7 +71,7 @@ export const msalConfig: Configuration = {
  * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/resources-and-scopes.md
  */
 export const protectedResources = {
-  profileApi: {
+  battleshipsApi: {
     endpoint: environment.BattleShipsApiUrl,
     scopes: [
       'https://ethanb2c.onmicrosoft.com/96729d6e-9698-4c43-b658-0af09e7ad68e/battleships.api',

@@ -1,10 +1,8 @@
-<div *ngIf="!profile">
+<div *ngIf="!player">
   <p>Getting Profile...</p>
 </div>
 
-<div *ngIf="profile">
-  <p><strong>Id: </strong> {{ profile.id }}</p>
-  <p><strong>Username: </strong> {{ profile.username }}</p>
-  <p><strong>TotalWins: </strong> {{ profile.totalWins }}</p>
-  <p><strong>TotalLosses: </strong> {{ profile.totalLosses }}</p>
+<div *ngIf="player">
+  <p><strong>GameId: </strong> {{ player.id }}</p>
+  <p><strong>AzureId: </strong> {{ player.azureId }}</p>
 </div>
