@@ -74,7 +74,7 @@ export const protectedResources = {
   profileApi: {
     endpoint: environment.BattleShipsApiUrl,
     scopes: [
-      'https://ethanb2c.onmicrosoft.com/05f22c50-f8ee-48c5-bf0f-df8cfc76fda0/users.api',
+      'https://ethanb2c.onmicrosoft.com/96729d6e-9698-4c43-b658-0af09e7ad68e/battleships.api',
     ],
   },
 };
