@@ -4,7 +4,7 @@ resource "azurerm_resource_group" "rg" {
 }
 
 resource "azurerm_storage_account" "static_storage" {
-  name                     = "battleshipsstaticstoragesite"
+  name                     = "bsstaticstorage"
   resource_group_name      = azurerm_resource_group.rg.name
   location                 = azurerm_resource_group.rg.location
   account_kind             = "StorageV2"
@@ -19,7 +19,7 @@ resource "azurerm_storage_account" "static_storage" {
 }
 
 resource "azurerm_static_site" "static_site" {
-  name                     = "battleshipsstaticsite"
+  name                     = "bsstaticsite"
   resource_group_name      = azurerm_resource_group.rg.name
   location                 = azurerm_resource_group.rg.location
   sku_tier = "Standard"
