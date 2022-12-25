@@ -93,12 +93,12 @@ jobs:
       #     #deployment_environment: # string. Deployment Environment.
       #     #production_branch: # string. Production Branch.
 
-      # - task: AzureStaticWebApp@0
-      #   inputs:
-      #     workingDirectory: "$(Pipeline.Workspace)"
-      #     app_location: "/"
-      #     skip_app_build: true
-      #     skip_api_build: true
-      #     verbose: true
-      #   env:
-      #     azure_static_web_apps_api_token: "$(deployment_token)"
+      - task: AzureStaticWebApp@0
+        inputs:
+          workingDirectory: "$(Pipeline.Workspace)"
+          app_location: "/"
+          skip_app_build: true
+          skip_api_build: true
+          verbose: true
+        env:
+          azure_static_web_apps_api_token: "$(bsstaticsite-token)"
