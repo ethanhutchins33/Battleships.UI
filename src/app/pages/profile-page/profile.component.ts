@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ProfileService } from '../../services/profile.service';
-import { Profile } from '../../models/profile.model';
+import { Player } from 'src/app/models/player';
+import { ProfileService } from '../../services/player.service';
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 
 @Component({
@@ -10,27 +9,24 @@ const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
-  profile!: Profile;
+  player!: Player;
 
-  constructor(
-    private http: HttpClient,
-    private profileService: ProfileService
-  ) {}
+  constructor(private playerService: ProfileService) {}
 
   ngOnInit() {
-    this.addProfile();
-    this.getProfile();
+    // this.addProfile();
+    this.getPlayer();
   }
 
-  getProfile(): void {
-    this.profileService.getUserProfile(this.profile).subscribe((profile) => {
-      this.profile = profile;
+  getPlayer(): void {
+    this.playerService.getUserProfile().subscribe((player) => {
+      this.player = player;
     });
   }
 
-  addProfile(): void {
-    this.profileService.addUserProfile(this.profile).subscribe((profile) => {
-      this.profile = profile;
+  addPlayer(): void {
+    this.playerService.addUserProfile(this.player).subscribe((player) => {
+      this.player = player;
     });
   }
 }
