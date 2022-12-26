@@ -8,7 +8,7 @@ pool:
   name: Self-Hosted
 
 jobs:
-  - job: A1
+  - job: Build-Deploy
     container: ukhydrographicoffice/terraform-azure-powershell:latest
     steps:
       - task: NodeTool@0
