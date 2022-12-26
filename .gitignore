@@ -45,6 +45,7 @@ azure.conf
 # Terraform
 # Local .terraform directories
 **/.terraform/*
+*.hcl
 
 # .tfstate files
 *.tfstate
