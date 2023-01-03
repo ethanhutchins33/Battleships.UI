@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { BoardCellComponent } from '../board-cell/board-cell.component';
 import { gameRow } from '../../models/gameRow';
-import { BoardService } from 'src/app/services/board.service';
+import { GameService as GameService } from 'src/app/services/game.service';
 import { cellClickedEvent } from 'src/app/models/cellClickedEvent';
 
 const NUM_PLAYERS: number = 2;
@@ -31,7 +31,7 @@ export class GameBoardComponent implements OnInit, AfterViewInit {
     { cells: ['A', 'B', 'C', 'D', 'E', 'F', 'G'], rowNumber: 7 },
   ];
 
-  constructor(private gameservice: BoardService) {}
+  constructor(private gameservice: GameService) {}
 
   ngOnInit(): void {}
 
