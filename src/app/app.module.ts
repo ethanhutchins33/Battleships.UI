@@ -20,7 +20,7 @@ import { ProfileComponent } from './pages/profile-page/profile.component';
 import { PlayComponent } from './pages/play-page/play.component';
 import { GameBoardComponent } from './components/game-board/game-board.component';
 
-import { ProfileService } from 'src/app/services/player.service';
+import { PlayerService } from 'src/app/services/player.service';
 import { GameService } from 'src/app/services/game.service';
 
 import {
@@ -119,7 +119,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     MsalService,
     MsalGuard,
     MsalBroadcastService,
-    ProfileService,
+    PlayerService,
     GameService,
   ],
   bootstrap: [AppComponent, MsalRedirectComponent],

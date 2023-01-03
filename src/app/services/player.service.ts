@@ -7,19 +7,11 @@ import { Player } from '../models/player';
 @Injectable({
   providedIn: 'root',
 })
-export class ProfileService {
+export class PlayerService {
   constructor(private http: HttpClient) {}
 
-  getUserProfile(): Observable<Player> {
-    console.log('Trying to get profile...');
+  getPlayer(): Observable<Player> {
+    console.log('Trying to get player...');
     return this.http.get<Player>(`${environment.BattleShipsApiUrl}/player/get`);
-  }
-
-  addUserProfile(user: Player): Observable<Player> {
-    console.log('Adding new user to the DB...');
-    return this.http.post<Player>(
-      `${environment.BattleShipsApiUrl}/player/add`,
-      user
-    );
   }
 }

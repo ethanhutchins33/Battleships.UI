@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProfileService } from '../../services/player.service';
+import { PlayerService } from '../../services/player.service';
 import { GameService } from '../../services/game.service';
 
 @Component({
@@ -10,17 +10,17 @@ import { GameService } from '../../services/game.service';
 export class PlayComponent implements OnInit {
   public gameStarted: boolean;
   private _gameService: GameService;
-  private _profileService: ProfileService;
+  private _playerService: PlayerService;
 
-  constructor(GameService: GameService, profileService: ProfileService) {
+  constructor(GameService: GameService, playerService: PlayerService) {
     this.gameStarted = false;
     this._gameService = GameService;
-    this._profileService = profileService;
+    this._playerService = playerService;
   }
 
   ngOnInit(): void {}
 
   createNewGame() {
-    //this._gameService.createGame(this._profileService.getUserProfile());
+    //this._gameService.createGame(this._playerService.getUserPlayer());
   }
 }
