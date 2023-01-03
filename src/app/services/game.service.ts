@@ -10,7 +10,7 @@ import { Player } from 'src/app/models/player';
 @Injectable({
   providedIn: 'root',
 })
-export class BoardService {
+export class GameService {
   constructor(private http: HttpClient) {}
 
   createGame(player: Player): Observable<CreateGameResponseDto> {
