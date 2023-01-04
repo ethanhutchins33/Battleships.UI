@@ -45,7 +45,7 @@ import {
 import { msalConfig, loginRequest, protectedResources } from './auth-config';
 import { FormsModule } from '@angular/forms';
 import { BoardCellComponent } from './components/board-cell/board-cell.component';
-import { ShipComponent } from './ship/ship.component';
+import { ShipComponent } from './components/ship/ship.component';
 
 export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication(msalConfig);
