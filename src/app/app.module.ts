@@ -1,3 +1,4 @@
+import { PlayComponent } from './pages/play-page/play.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,7 +18,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home-page/home.component';
 import { ProfileComponent } from './pages/profile-page/profile.component';
-import { PlayComponent } from './pages/play-page/play.component';
+import { CreateGameComponent } from './pages/create-game/create-game.component';
 import { GameBoardComponent } from './components/game-board/game-board.component';
 
 import { PlayerService } from 'src/app/services/player.service';
@@ -79,6 +80,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     ProfileComponent,
     GameBoardComponent,
     BoardCellComponent,
+    CreateGameComponent,
     PlayComponent,
     ShipComponent,
   ],
@@ -98,7 +100,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     HttpClientModule,
     FormsModule,
     MsalModule,
-    MsalModule,
+    DragDropModule,
   ],
   providers: [
     {
