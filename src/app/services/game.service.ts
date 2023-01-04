@@ -4,19 +4,26 @@ import { cellClickedEvent } from 'src/app/models/cellClickedEvent';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { CreateGameResponseDto } from 'src/app/requests/CreateGameResponseDto';
-import { Player } from 'src/app/models/player';
+import { CreateGameResponseDto } from 'src/app/responses/CreateGameResponseDto';
+import { JoinGameResponseDto } from '../responses/JoinGameResponseDto';
 
 @Injectable({
   providedIn: 'root',
 })
-export class BoardService {
+export class GameService {
   constructor(private http: HttpClient) {}
 
-  createGame(player: Player): Observable<CreateGameResponseDto> {
+  createGame(): Observable<CreateGameResponseDto> {
     return this.http.post<CreateGameResponseDto>(
       `${environment.BattleShipsApiUrl}/game/create`,
-      player.id
+      null
+    );
+  }
+
+  joinGame(gameCode: string): Observable<JoinGameResponseDto> {
+    return this.http.post<JoinGameResponseDto>(
+      `${environment.BattleShipsApiUrl}/game/join/${gameCode}`,
+      null
     );
   }
 

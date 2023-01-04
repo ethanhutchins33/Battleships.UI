@@ -1,3 +1,4 @@
+import { PlayComponent } from './pages/play-page/play.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,11 +18,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home-page/home.component';
 import { ProfileComponent } from './pages/profile-page/profile.component';
-import { PlayComponent } from './pages/play-page/play.component';
+import { CreateGameComponent } from './pages/create-game/create-game.component';
 import { GameBoardComponent } from './components/game-board/game-board.component';
 
-import { ProfileService } from 'src/app/services/profile.service';
-import { BoardService } from 'src/app/services/board.service';
+import { PlayerService } from 'src/app/services/player.service';
+import { GameService } from 'src/app/services/game.service';
 
 import {
   MsalModule,
@@ -45,6 +46,7 @@ import {
 import { msalConfig, loginRequest, protectedResources } from './auth-config';
 import { FormsModule } from '@angular/forms';
 import { BoardCellComponent } from './components/board-cell/board-cell.component';
+import { ShipComponent } from './components/ship/ship.component';
 
 export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication(msalConfig);
@@ -54,8 +56,8 @@ export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
   const protectedResourceMap = new Map<string, Array<string>>();
 
   protectedResourceMap.set(
-    protectedResources.profileApi.endpoint,
-    protectedResources.profileApi.scopes
+    protectedResources.battleshipsApi.endpoint,
+    protectedResources.battleshipsApi.scopes
   );
 
   return {
@@ -78,7 +80,9 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     ProfileComponent,
     GameBoardComponent,
     BoardCellComponent,
+    CreateGameComponent,
     PlayComponent,
+    ShipComponent,
   ],
   imports: [
     BrowserModule,
@@ -96,7 +100,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     HttpClientModule,
     FormsModule,
     MsalModule,
-    MsalModule,
+    DragDropModule,
   ],
   providers: [
     {
@@ -119,8 +123,8 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     MsalService,
     MsalGuard,
     MsalBroadcastService,
-    ProfileService,
-    BoardService,
+    PlayerService,
+    GameService,
   ],
   bootstrap: [AppComponent, MsalRedirectComponent],
 })
