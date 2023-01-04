@@ -27,10 +27,10 @@ export class GameService {
     );
   }
 
-  shotFired($event: cellClickedEvent): Observable<cellStatus> {
+  fireShot($event: cellClickedEvent): Observable<cellStatus> {
     console.log('Joining Game');
     return this.http.get<cellStatus>(
-      `${environment.BattleShipsApiUrl}/game/join`
+      `${environment.BattleShipsApiUrl}/game/fire`
     );
   }
 }
