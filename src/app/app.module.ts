@@ -100,7 +100,6 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     HttpClientModule,
     FormsModule,
     MsalModule,
-    DragDropModule,
   ],
   providers: [
     {
