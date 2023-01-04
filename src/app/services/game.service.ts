@@ -27,13 +27,6 @@ export class GameService {
     );
   }
 
-  // addHero(hero: Hero): Observable<Hero> {
-  //   return this.http.post<Hero>(this.heroesUrl, hero, httpOptions)
-  //     .pipe(
-  //       catchError(this.handleError('addHero', hero))
-  //     );
-  // }
-
   shotFired($event: cellClickedEvent): Observable<cellStatus> {
     console.log('Joining Game');
     return this.http.get<cellStatus>(
