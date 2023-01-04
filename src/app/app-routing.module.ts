@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { MsalGuard } from '@azure/msal-angular';
+
 import { HomeComponent } from './pages/home-page/home.component';
 import { ProfileComponent } from './pages/profile-page/profile.component';
-import { MsalGuard } from '@azure/msal-angular';
+import { CreateGameComponent } from './pages/create-game/create-game.component';
 import { PlayComponent } from './pages/play-page/play.component';
 
 const routes: Routes = [
@@ -16,8 +18,12 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'play',
+    path: 'play/:gameCode',
     component: PlayComponent,
+  },
+  {
+    path: 'play',
+    component: CreateGameComponent,
   },
 ];
 
