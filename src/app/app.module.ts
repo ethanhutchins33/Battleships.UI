@@ -46,8 +46,7 @@ import {
 import { msalConfig, loginRequest, protectedResources } from './auth-config';
 import { FormsModule } from '@angular/forms';
 import { BoardCellComponent } from './components/board-cell/board-cell.component';
-import { ShipPlacerComponent } from './components/ship-placer/ship-placer.component';
-import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ShipComponent } from './components/ship/ship.component';
 
 export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication(msalConfig);
@@ -83,7 +82,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     BoardCellComponent,
     CreateGameComponent,
     PlayComponent,
-    ShipPlacerComponent,
+    ShipComponent,
   ],
   imports: [
     BrowserModule,
