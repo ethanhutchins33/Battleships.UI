@@ -1,9 +1,0 @@
-.centre {
-  display: flex;
-  justify-content: center;
-}
-
-mat-button {
-  background-color: green;
-  font-size: large;
-}

@@ -1,6 +1,6 @@
+import { GameService } from 'src/app/services/game.service';
 import { Component, OnInit } from '@angular/core';
-import { PlayerService } from '../../services/player.service';
-import { GameService } from '../../services/game.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-play',
@@ -8,19 +8,14 @@ import { GameService } from '../../services/game.service';
   styleUrls: ['./play.component.css'],
 })
 export class PlayComponent implements OnInit {
-  public gameStarted: boolean;
-  private _gameService: GameService;
-  private _playerService: PlayerService;
+  constructor(
+    private readonly route: ActivatedRoute,
+    private readonly gameService: GameService
+  ) {}
 
-  constructor(GameService: GameService, playerService: PlayerService) {
-    this.gameStarted = false;
-    this._gameService = GameService;
-    this._playerService = playerService;
-  }
-
-  ngOnInit(): void {}
-
-  createNewGame() {
-    //this._gameService.createGame(this._playerService.getUserPlayer());
+  ngOnInit(): void {
+    this.route.params.subscribe((params: any) => {
+      this.gameService.joinGame(params.gameCode).subscribe();
+    });
   }
 }
