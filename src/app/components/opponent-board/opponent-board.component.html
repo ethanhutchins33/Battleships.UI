@@ -1,12 +1,12 @@
-<div class="game-board">
+<div class="opponent-board">
   <div class="game-row" *ngFor="let row of board">
     {{ row.rowNumber }}
-    <app-board-cell
+    <app-opponent-cell
       *ngFor="let cell of row.cells"
       [xCoord]="cell"
       [yCoord]="row.rowNumber"
       (cellClicked)="fireTorpedo($event)"
-      class="board-cell"
-    ></app-board-cell>
+      class="opponent-cell"
+    ></app-opponent-cell>
   </div>
 </div>

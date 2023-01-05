@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BoardCellComponent } from './board-cell.component';
+import { BoardCellComponent } from './opponent-cell.component';
 
 describe('BoardCellComponent', () => {
   let component: BoardCellComponent;

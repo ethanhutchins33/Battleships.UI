@@ -19,7 +19,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home-page/home.component';
 import { ProfileComponent } from './pages/profile-page/profile.component';
 import { CreateGameComponent } from './pages/create-game/create-game.component';
-import { GameBoardComponent } from './components/game-board/game-board.component';
+import { GameBoardComponent } from './components/opponent-board/opponent-board.component';
 
 import { PlayerService } from 'src/app/services/player.service';
 import { GameService } from 'src/app/services/game.service';
@@ -45,7 +45,7 @@ import {
 
 import { msalConfig, loginRequest, protectedResources } from './auth-config';
 import { FormsModule } from '@angular/forms';
-import { BoardCellComponent } from './components/board-cell/board-cell.component';
+import { BoardCellComponent } from './components/opponent-cell/opponent-cell.component';
 import { ShipComponent } from './components/ship/ship.component';
 import { ShipSelectorComponent } from './components/ship-selector/ship-selector.component';
 import { HostBoardComponent } from './components/host-board/host-board.component';

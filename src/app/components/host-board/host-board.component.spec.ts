@@ -8,9 +8,8 @@ describe('HostBoardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HostBoardComponent ]
-    })
-    .compileComponents();
+      declarations: [HostBoardComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

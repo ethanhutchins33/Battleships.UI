@@ -1,22 +1,18 @@
-import {
-  AfterViewInit,
-  Component,
-  OnInit,
-  QueryList,
-  ViewChildren,
-} from '@angular/core';
-import { BoardCellComponent } from '../board-cell/board-cell.component';
+import { Component, QueryList, ViewChildren } from '@angular/core';
+import { BoardCellComponent } from '../opponent-cell/opponent-cell.component';
 import { gameRow } from '../../models/gameRow';
 import { GameService as GameService } from 'src/app/services/game.service';
 import { cellLocationEvent } from 'src/app/models/cellLocationEvent';
 
 @Component({
-  selector: 'app-game-board',
-  templateUrl: './game-board.component.html',
-  styleUrls: ['./game-board.component.css'],
+  selector: 'app-opponent-board',
+  templateUrl: './opponent-board.component.html',
+  styleUrls: ['./opponent-board.component.css'],
 })
-export class GameBoardComponent implements OnInit, AfterViewInit {
+export class GameBoardComponent {
   @ViewChildren(BoardCellComponent) cells!: QueryList<BoardCellComponent>;
+
+  constructor(private gameservice: GameService) {}
 
   board: Array<gameRow> = [
     { cells: ['A', 'B', 'C', 'D', 'E', 'F', 'G'], rowNumber: 1 },
@@ -27,12 +23,6 @@ export class GameBoardComponent implements OnInit, AfterViewInit {
     { cells: ['A', 'B', 'C', 'D', 'E', 'F', 'G'], rowNumber: 6 },
     { cells: ['A', 'B', 'C', 'D', 'E', 'F', 'G'], rowNumber: 7 },
   ];
-
-  constructor(private gameservice: GameService) {}
-
-  ngOnInit(): void {}
-
-  ngAfterViewInit(): void {}
 
   fireTorpedo($event: cellLocationEvent) {
     console.log($event);
