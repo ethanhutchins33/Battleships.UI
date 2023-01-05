@@ -1,3 +1,3 @@
-export class cellStatus {
-  status: string = 'hidden';
+export interface cellStatus {
+  status: string;
 }

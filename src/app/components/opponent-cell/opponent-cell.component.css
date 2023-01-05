@@ -1,4 +1,4 @@
-.host-cell {
+.opponent-cell {
   width: 60px;
   height: 60px;
   border: 2px solid #00b8d4; /* use a shade of blue as the border color */
@@ -8,4 +8,21 @@
   transition: transform 0.2s ease-in-out; /* add a transition to animate the transformation of the cells */
   text-align: center;
   line-height: 30px;
+}
+
+.opponent-cell:hover {
+  background-color: #00b8d4; /* change the background color when the mouse is hovering over the cell */
+  outline: 3px solid black; /* add an outline to the cell */
+}
+
+.hidden {
+  background-color: grey;
+}
+
+.missed {
+  background-color: rgb(253, 92, 92);
+}
+
+.hit {
+  background-color: rgb(93, 93, 250);
 }

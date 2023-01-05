@@ -1,1 +1,11 @@
-<p>host-board works!</p>
+<div class="host-board">
+  <div class="game-row" *ngFor="let row of board">
+    {{ row.rowNumber }}
+    <app-host-cell
+      *ngFor="let cell of row.cells"
+      [xCoord]="cell"
+      [yCoord]="row.rowNumber"
+      class="host-cell"
+    ></app-host-cell>
+  </div>
+</div>
