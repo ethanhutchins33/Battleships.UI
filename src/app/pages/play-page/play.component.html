@@ -1,17 +1,19 @@
-<div class="boards-container">
-  <div class="HostBoard">
-    <h2>Your Board</h2>
-    <p>PlayerId: {{ HostPlayerId }}</p>
-    <p>BoardId: {{ HostPlayerBoardId }}</p>
-    <app-host-board></app-host-board>
+<div cdkDropListGroup>
+  <div class="boards-container">
+    <div class="HostBoard">
+      <h2>Your Board</h2>
+      <p>PlayerId: {{ HostPlayerId }}</p>
+      <p>BoardId: {{ HostPlayerBoardId }}</p>
+      <app-host-board></app-host-board>
+    </div>
+    <div class="GuestBoard" *ngIf="gameStarted">
+      <h2>Opponent Board</h2>
+      <p>Opponent PlayerId: {{ OpponentId }}</p>
+      <p>Opponent BoardId: {{ OpponentBoardId }}</p>
+      <app-opponent-board></app-opponent-board>
+    </div>
   </div>
-  <div class="GuestBoard" *ngIf="gameStarted">
-    <h2>Opponent Board</h2>
-    <p>Opponent PlayerId: {{ OpponentId }}</p>
-    <p>Opponent BoardId: {{ OpponentBoardId }}</p>
-    <app-opponent-board></app-opponent-board>
+  <div class="ship-selector-container" *ngIf="!gameStarted">
+    <app-ship-selector></app-ship-selector>
   </div>
-</div>
-<div class="ship-selector-container" *ngIf="!gameStarted">
-  <app-ship-selector></app-ship-selector>
 </div>

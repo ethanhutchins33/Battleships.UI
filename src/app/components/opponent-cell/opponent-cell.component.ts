@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { cellStatus } from '../../models/cellStatus';
 import { cellLocationEvent } from 'src/app/models/cellLocationEvent';
 
@@ -7,7 +7,7 @@ import { cellLocationEvent } from 'src/app/models/cellLocationEvent';
   templateUrl: './opponent-cell.component.html',
   styleUrls: ['./opponent-cell.component.css'],
 })
-export class BoardCellComponent implements OnInit {
+export class BoardCellComponent {
   constructor() {}
 
   @Input() xCoord: string = '';
@@ -15,8 +15,6 @@ export class BoardCellComponent implements OnInit {
   @Input() cellStatus: cellStatus = { status: 'hidden' };
   @Output() cellClicked: EventEmitter<cellLocationEvent> =
     new EventEmitter<cellLocationEvent>();
-
-  ngOnInit(): void {}
 
   onClick(): void {
     this.cellClicked.emit({ Col: this.xCoord, Row: this.yCoord });

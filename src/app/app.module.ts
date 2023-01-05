@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -106,6 +107,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     HttpClientModule,
     FormsModule,
     MsalModule,
+    DragDropModule,
   ],
   providers: [
     {
