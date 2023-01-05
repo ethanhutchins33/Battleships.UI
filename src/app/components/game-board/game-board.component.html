@@ -1,9 +1,12 @@
-<div class="gameRow" *ngFor="let row of board">
-  {{ row.rowNumber }}
-  <app-board-cell
-    *ngFor="let cell of row.cells"
-    [xCoord]="cell"
-    [yCoord]="row.rowNumber"
-    (cellClicked)="fireTorpedo($event)"
-  ></app-board-cell>
+<div class="game-board">
+  <div class="game-row" *ngFor="let row of board">
+    {{ row.rowNumber }}
+    <app-board-cell
+      *ngFor="let cell of row.cells"
+      [xCoord]="cell"
+      [yCoord]="row.rowNumber"
+      (cellClicked)="fireTorpedo($event)"
+      class="board-cell"
+    ></app-board-cell>
+  </div>
 </div>
