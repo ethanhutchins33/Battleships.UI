@@ -1,3 +1,17 @@
-<div class='centre'>
-  <app-game-board></app-game-board>
+<div class="boards-container">
+  <div class="HostBoard">
+    <h2>Your Board</h2>
+    <p>PlayerId: {{ HostPlayerId }}</p>
+    <p>BoardId: {{ HostPlayerBoardId }}</p>
+    <app-game-board></app-game-board>
+  </div>
+  <div class="GuestBoard" *ngIf="gameStarted">
+    <h2>Opponent Board</h2>
+    <p>Opponent PlayerId: {{ OpponentId }}</p>
+    <p>Opponent BoardId: {{ OpponentBoardId }}</p>
+    <app-game-board></app-game-board>
+  </div>
+</div>
+<div class="ship-selector-container" *ngIf="!gameStarted">
+  <app-ship-selector></app-ship-selector>
 </div>
