@@ -8,10 +8,7 @@ import {
 import { BoardCellComponent } from '../board-cell/board-cell.component';
 import { gameRow } from '../../models/gameRow';
 import { GameService as GameService } from 'src/app/services/game.service';
-import { cellClickedEvent } from 'src/app/models/cellClickedEvent';
-
-const NUM_PLAYERS: number = 2;
-const BOARD_SIZE: number = 7;
+import { cellLocationEvent } from 'src/app/models/cellLocationEvent';
 
 @Component({
   selector: 'app-game-board',
@@ -37,15 +34,15 @@ export class GameBoardComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {}
 
-  fireTorpedo($event: cellClickedEvent) {
+  fireTorpedo($event: cellLocationEvent) {
     console.log($event);
     const tempCell = this.cells.find(
-      (cell) => cell.xCoord == $event.X && cell.yCoord == $event.Y
+      (cell) => cell.xCoord == $event.Col && cell.yCoord == $event.Row
     );
 
     if (tempCell) {
-      this.gameservice.shotFired($event).subscribe((result) => {
-        tempCell.cellStatus = result;
+      this.gameservice.fireShot($event).subscribe((result) => {
+        tempCell.cellStatus.status = result.ShotResult;
       });
     }
   }
