@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { cellStatus } from '../../models/cellStatus';
-import { cellClickedEvent } from 'src/app/models/cellClickedEvent';
+import { cellLocationEvent } from 'src/app/models/cellLocationEvent';
 
 @Component({
   selector: 'app-board-cell',
@@ -13,12 +13,12 @@ export class BoardCellComponent implements OnInit {
   @Input() xCoord: string = '';
   @Input() yCoord: number = 0;
   @Input() cellStatus: cellStatus = new cellStatus();
-  @Output() cellClicked: EventEmitter<cellClickedEvent> =
-    new EventEmitter<cellClickedEvent>();
+  @Output() cellClicked: EventEmitter<cellLocationEvent> =
+    new EventEmitter<cellLocationEvent>();
 
   ngOnInit(): void {}
 
   onClick(): void {
-    this.cellClicked.emit({ X: this.xCoord, Y: this.yCoord });
+    this.cellClicked.emit({ Col: this.xCoord, Row: this.yCoord });
   }
 }
