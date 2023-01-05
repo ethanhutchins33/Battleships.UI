@@ -1,4 +1,8 @@
 export interface JoinGameResponseDto {
-  HostPlayerId: number;
-  GuestPlayerId: number;
+  gameId: number;
+  gameCode: string;
+  boardId: number;
+  playerId: number;
+  opponentPlayerId: number;
+  opponentBoardId: number;
 }
