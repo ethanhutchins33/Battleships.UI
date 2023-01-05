@@ -48,6 +48,8 @@ import { FormsModule } from '@angular/forms';
 import { BoardCellComponent } from './components/board-cell/board-cell.component';
 import { ShipComponent } from './components/ship/ship.component';
 import { ShipSelectorComponent } from './components/ship-selector/ship-selector.component';
+import { HostBoardComponent } from './components/host-board/host-board.component';
+import { HostCellComponent } from './components/host-cell/host-cell.component';
 
 export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication(msalConfig);
@@ -85,6 +87,8 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     PlayComponent,
     ShipComponent,
     ShipSelectorComponent,
+    HostBoardComponent,
+    HostCellComponent,
   ],
   imports: [
     BrowserModule,
