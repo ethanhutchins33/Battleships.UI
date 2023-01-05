@@ -14,11 +14,8 @@ export class ProfileComponent implements OnInit {
   constructor(private playerService: PlayerService) {}
 
   ngOnInit() {
-
     this.playerService.getPlayer().subscribe((player) => {
       this.player = player;
     });
-    
   }
-  
 }
