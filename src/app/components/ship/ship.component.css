@@ -1,0 +1,11 @@
+.ship {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: lightgrey; /* set the default background color to white */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); /* add a subtle box-shadow to add depth */
+  border-radius: 20px; /* add rounded corners to the game cells */
+  text-align: center;
+}
