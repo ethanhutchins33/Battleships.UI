@@ -1,8 +1,11 @@
-.centre {
-  margin-left: auto;
-  margin-right: auto;
+.game-board {
+  background-color: #00b8d4;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  height: auto;
+  width: 448px;
 }
 
-.gameRow {
+.game-board {
   display: flex;
 }
