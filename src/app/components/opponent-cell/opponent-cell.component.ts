@@ -10,13 +10,12 @@ import { cellLocationEvent } from 'src/app/models/cellLocationEvent';
 export class BoardCellComponent {
   constructor() {}
 
-  @Input() xCoord: string = '';
+  @Input() xCoord: number = 0;
   @Input() yCoord: number = 0;
   @Input() cellStatus: cellStatus = { status: 'hidden' };
-  @Output() cellClicked: EventEmitter<cellLocationEvent> =
-    new EventEmitter<cellLocationEvent>();
+  @Output() cellClicked = new EventEmitter<cellLocationEvent>();
 
   onClick(): void {
-    this.cellClicked.emit({ Col: this.xCoord, Row: this.yCoord });
+    this.cellClicked.emit({ X: this.xCoord, Y: this.yCoord });
   }
 }

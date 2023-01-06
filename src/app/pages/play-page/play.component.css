@@ -1,4 +1,5 @@
 .boards-container {
+  flex-wrap: wrap;
   padding: 10px;
   display: flex;
   justify-content: center;
@@ -6,43 +7,27 @@
 
 .host-board-container,
 .opponent-board-container {
-  padding: 10px;
+  padding: 20px;
+  border: 2px solid black;
+  border-radius: 15px;
   width: auto;
   height: auto;
 }
 
 .ship-selector-container {
-  margin: auto;
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
   padding: 10px;
-  width: 400px;
-  height: 200px;
+  width: auto;
+  height: auto;
   text-align: center;
-  border: 1px solid black;
-  padding: 10px;
+  border: 2px solid black;
+  border-radius: 15px;
 }
 
 /* @media screen and (max-width: 1050px) {
   .boards-container {
-    flex-direction: column;
-    justify-content: center;
-    display: flex;
+    flex-wrap: wrap;
   }
-
-  .HostBoard,
-  .GuestBoard {
-    padding: 10px;
-    width: 100%;
-    height: 500;
-  }
-
-  .ship-selector-container {
-    margin: auto;
-    padding: 10px;
-    width: 100%;
-    height: 400px;
-    text-align: center;
-    border: 1px solid black;
-    padding: 10px;
-  }
-}
 } */

@@ -1,8 +1,9 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, QueryList, ViewChildren } from '@angular/core';
 import { BoardCellComponent } from '../opponent-cell/opponent-cell.component';
-import { gameRow } from '../../models/gameRow';
 import { GameService as GameService } from 'src/app/services/game.service';
 import { cellLocationEvent } from 'src/app/models/cellLocationEvent';
+import { ShotFiredDto } from 'src/app/requests/ShotFiredRequestDto';
 
 @Component({
   selector: 'app-opponent-board',
@@ -15,27 +16,33 @@ import { cellLocationEvent } from 'src/app/models/cellLocationEvent';
 export class GameBoardComponent {
   @ViewChildren(BoardCellComponent) cells!: QueryList<BoardCellComponent>;
 
-  constructor(private gameservice: GameService) {}
+  constructor(
+    private gameService: GameService,
+    private route: ActivatedRoute
+  ) {}
 
-  board: Array<gameRow> = [
-    { cells: ['A', 'B', 'C', 'D', 'E', 'F', 'G'], rowNumber: 1 },
-    { cells: ['A', 'B', 'C', 'D', 'E', 'F', 'G'], rowNumber: 2 },
-    { cells: ['A', 'B', 'C', 'D', 'E', 'F', 'G'], rowNumber: 3 },
-    { cells: ['A', 'B', 'C', 'D', 'E', 'F', 'G'], rowNumber: 4 },
-    { cells: ['A', 'B', 'C', 'D', 'E', 'F', 'G'], rowNumber: 5 },
-    { cells: ['A', 'B', 'C', 'D', 'E', 'F', 'G'], rowNumber: 6 },
-    { cells: ['A', 'B', 'C', 'D', 'E', 'F', 'G'], rowNumber: 7 },
-  ];
+  board: string[][] = this.gameService.getNewBoard();
 
   fireTorpedo($event: cellLocationEvent) {
     console.log($event);
     const tempCell = this.cells.find(
-      (cell) => cell.xCoord == $event.Col && cell.yCoord == $event.Row
+      (cell) => cell.xCoord == $event.X && cell.yCoord == $event.Y
     );
 
     if (tempCell) {
-      this.gameservice.fireShot($event).subscribe((result) => {
-        tempCell.cellStatus.status = result.ShotResult;
+      let dto: ShotFiredDto;
+
+      this.route.params.subscribe((params: any) => {
+        dto = {
+          GameCode: params.gameCode,
+          BoardId: 0,
+          X: $event.X,
+          Y: $event.Y,
+        };
+
+        this.gameService.fireShot(dto).subscribe((result) => {
+          tempCell.cellStatus.status = result.shotResult;
+        });
       });
     }
   }

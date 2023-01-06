@@ -1,3 +1,3 @@
-<div class="host-cell" [ngClass]="cellStatus.status" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="ship">
-  {{ cellStatus.status }}
+<div class="host-cell" cdkDropList (cdkDropListDropped)="onDrop($event)">
+  {{ status }}
 </div>
