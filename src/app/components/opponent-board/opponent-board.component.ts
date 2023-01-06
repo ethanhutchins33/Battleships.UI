@@ -7,7 +7,10 @@ import { cellLocationEvent } from 'src/app/models/cellLocationEvent';
 @Component({
   selector: 'app-opponent-board',
   templateUrl: './opponent-board.component.html',
-  styleUrls: ['./opponent-board.component.css'],
+  styleUrls: [
+    '../base-styles/board-base.css',
+    './opponent-board.component.css',
+  ],
 })
 export class GameBoardComponent {
   @ViewChildren(BoardCellComponent) cells!: QueryList<BoardCellComponent>;

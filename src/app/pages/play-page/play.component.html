@@ -1,12 +1,13 @@
 <div cdkDropListGroup>
   <div class="boards-container">
-    <div class="HostBoard">
+    <div class="host-board-container">
       <h2>Your Board</h2>
       <p>PlayerId: {{ HostPlayerId }}</p>
       <p>BoardId: {{ HostPlayerBoardId }}</p>
       <app-host-board></app-host-board>
     </div>
-    <div class="GuestBoard" *ngIf="gameStarted">
+    <!-- *ngIf="gameStarted" -->
+    <div class="opponent-board-container">
       <h2>Opponent Board</h2>
       <p>Opponent PlayerId: {{ OpponentId }}</p>
       <p>Opponent BoardId: {{ OpponentBoardId }}</p>

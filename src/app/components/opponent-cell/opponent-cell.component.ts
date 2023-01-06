@@ -5,7 +5,7 @@ import { cellLocationEvent } from 'src/app/models/cellLocationEvent';
 @Component({
   selector: 'app-opponent-cell',
   templateUrl: './opponent-cell.component.html',
-  styleUrls: ['./opponent-cell.component.css'],
+  styleUrls: ['../base-styles/cell-base.css', './opponent-cell.component.css'],
 })
 export class BoardCellComponent {
   constructor() {}
