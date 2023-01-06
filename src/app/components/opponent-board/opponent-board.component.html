@@ -1,12 +1,13 @@
 <div class="opponent-board">
-  <div class="game-row" *ngFor="let row of board">
-    {{ row.rowNumber }}
-    <app-opponent-cell
-      *ngFor="let cell of row.cells"
-      [xCoord]="cell"
-      [yCoord]="row.rowNumber"
-      (cellClicked)="fireTorpedo($event)"
-      class="opponent-cell"
-    ></app-opponent-cell>
+  <div class="host-row" *ngFor="let row of board; let i = index">
+    <!-- <th>{{ i + 1 }}</th> -->
+    <div class="host-cells" *ngFor="let cell of row; let j = index">
+      <app-opponent-cell
+        class="opponent-cell"
+        [xCoord]="j"
+        [yCoord]="i"
+        (cellClicked)="fireTorpedo($event)"
+      ></app-opponent-cell>
+    </div>
   </div>
 </div>

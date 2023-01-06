@@ -1,4 +1,4 @@
 export interface cellLocationEvent {
-  Col: string;
-  Row: number;
+  X: number;
+  Y: number;
 }

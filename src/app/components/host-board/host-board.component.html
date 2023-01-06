@@ -1,11 +1,12 @@
 <div class="host-board">
-  <div class="game-row" *ngFor="let row of board">
-    {{ row.rowNumber }}
-    <app-host-cell
-      *ngFor="let cell of row.cells"
-      [xCoord]="cell"
-      [yCoord]="row.rowNumber"
-      class="host-cell"
-    ></app-host-cell>
+  <div class="host-row" *ngFor="let row of board; let i = index">
+    <!-- <th>{{ i + 1 }}</th> -->
+    <div class="host-cells" *ngFor="let cell of row; let j = index">
+      <app-host-cell
+        class="host-cell"
+        [status]="board[i][j]"
+        (shipDropped)="addShip($event, i, j)"
+      ></app-host-cell>
+    </div>
   </div>
 </div>

@@ -1,4 +1,10 @@
 <p>Drag and drop your ships onto the board!</p>
 <div class="shipList" cdkDropList cdkDropListData="ships">
-  <app-ship></app-ship>
+  <app-ship
+    *ngFor="let ship of ships"
+    [id]="ship.id"
+    [shipSize]="ship.size"
+    [X]="ship.X"
+    [Y]="ship.Y"
+  ></app-ship>
 </div>
