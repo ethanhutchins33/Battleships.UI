@@ -8,7 +8,7 @@ import { gameRow } from 'src/app/models/gameRow';
 @Component({
   selector: 'app-host-board',
   templateUrl: './host-board.component.html',
-  styleUrls: ['./host-board.component.css'],
+  styleUrls: ['../base-styles/board-base.css', './host-board.component.css'],
 })
 export class HostBoardComponent {
   @ViewChildren(HostCellComponent) cells!: QueryList<HostCellComponent>;
