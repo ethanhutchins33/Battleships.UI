@@ -1,5 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
-import { Component, QueryList, ViewChildren } from '@angular/core';
+import { Component, Input, QueryList, ViewChildren } from '@angular/core';
 import { BoardCellComponent } from '../opponent-cell/opponent-cell.component';
 import { GameService as GameService } from 'src/app/services/game.service';
 import { cellLocationEvent } from 'src/app/models/cellLocationEvent';
@@ -14,6 +14,8 @@ import { ShotFiredDto } from 'src/app/requests/ShotFiredRequestDto';
   ],
 })
 export class GameBoardComponent {
+  @Input() boardId!: number;
+  @Input() playerId!: number;
   @ViewChildren(BoardCellComponent) cells!: QueryList<BoardCellComponent>;
 
   constructor(
