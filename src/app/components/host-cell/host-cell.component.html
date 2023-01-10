@@ -1,3 +1,8 @@
-<div class="host-cell" cdkDropList (cdkDropListDropped)="onDrop($event)">
-  {{ status }}
+<div
+  class="host-cell"
+  cdkDropList
+  (cdkDropListDropped)="onDrop($event)"
+  [cdkDropListData]="ships"
+>
+  {{ ships[0]?.id }}
 </div>
