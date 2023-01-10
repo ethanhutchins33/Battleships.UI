@@ -13,7 +13,7 @@ export class PlayComponent implements OnInit {
   OpponentId!: number;
   OpponentBoardId!: number;
   GameCode!: string;
-gameStarted: any;
+  gameStarted: boolean = false;
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -23,7 +23,6 @@ gameStarted: any;
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
       this.gameService.joinGame(params.gameCode).subscribe((result) => {
-        console.log(result.playerId);
 
         this.HostPlayerId = result.playerId;
         this.HostPlayerBoardId = result.boardId;
