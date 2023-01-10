@@ -6,6 +6,8 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { CreateGameResponseDto } from 'src/app/responses/CreateGameResponseDto';
 import { JoinGameResponseDto } from '../responses/JoinGameResponseDto';
+import { SendShipsRequestDto } from '../requests/SendShipsRequestDto';
+import { AddShipsResponseDto } from '../responses/AddShipsResponseDto';
 
 @Injectable({
   providedIn: 'root',
@@ -35,6 +37,16 @@ export class GameService {
     return this.http.post<FireShotResponseDto>(
       `${environment.BattleShipsApiUrl}/game/fire`,
       shotFiredDto
+    );
+  }
+
+  sendShips(
+    sendShipsDto: SendShipsRequestDto
+  ): Observable<AddShipsResponseDto> {
+    console.log('hitting sendships API');
+    return this.http.post<AddShipsResponseDto>(
+      `${environment.BattleShipsApiUrl}/game/addships`,
+      sendShipsDto
     );
   }
 

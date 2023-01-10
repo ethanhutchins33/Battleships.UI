@@ -1,5 +1,5 @@
 <p>Drag and drop your ships onto the board!</p>
-<div class="shipList" cdkDropList cdkDropListData="ships">
+<div class="shipList" cdkDropList [cdkDropListData]="ships">
   <app-ship
     *ngFor="let ship of ships"
     [id]="ship.id"
