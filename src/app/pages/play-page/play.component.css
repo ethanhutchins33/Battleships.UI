@@ -1,0 +1,31 @@
+.boards-container {
+  flex-wrap: wrap;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.host-board-container,
+.opponent-board-container {
+  padding: 20px;
+  border: 2px solid black;
+  border-radius: 15px;
+  width: auto;
+  height: auto;
+}
+
+.ship-selector-container {
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  width: auto;
+  height: auto;
+  text-align: center;
+}
+
+/* @media screen and (max-width: 1050px) {
+  .boards-container {
+    flex-wrap: wrap;
+  }
+} */

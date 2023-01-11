@@ -8,6 +8,13 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./play.component.css'],
 })
 export class PlayComponent implements OnInit {
+  HostPlayerId!: number;
+  HostPlayerBoardId!: number;
+  OpponentId!: number;
+  OpponentBoardId!: number;
+  GameCode!: string;
+  gameStarted: boolean = false;
+
   constructor(
     private readonly route: ActivatedRoute,
     private readonly gameService: GameService
@@ -15,7 +22,14 @@ export class PlayComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
-      this.gameService.joinGame(params.gameCode).subscribe();
+      this.gameService.joinGame(params.gameCode).subscribe((result) => {
+
+        this.HostPlayerId = result.playerId;
+        this.HostPlayerBoardId = result.boardId;
+        this.OpponentId = result.opponentPlayerId;
+        this.OpponentBoardId = result.opponentBoardId;
+        this.GameCode = result.gameCode;
+      });
     });
   }
 }

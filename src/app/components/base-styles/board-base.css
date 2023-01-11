@@ -1,0 +1,14 @@
+.host-board,
+.opponent-board {
+  background-color: #00b8d4;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  height: auto;
+  width: auto;
+  padding: 5px;
+}
+
+.host-row,
+.opponent-row {
+  display: flex;
+}

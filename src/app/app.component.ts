@@ -16,7 +16,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  title = 'BattleShips';
+  title = 'Battleships';
   isIframe = false;
   loginDisplay = false;
   private readonly _destroying$ = new Subject<void>();
