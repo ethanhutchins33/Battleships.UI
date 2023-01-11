@@ -13,7 +13,6 @@ export class HostBoardComponent {
   @Input() boardId: number = 0;
   @Input() playerId: number = 0;
   @Input() gameCode: string = '';
-  @ViewChildren(HostCellComponent) cells!: QueryList<HostCellComponent>;
 
   constructor(private gameService: GameService) {}
 
@@ -30,19 +29,20 @@ export class HostBoardComponent {
     //check board for at least one ship
     if (this.board.toString() == '') {
       console.log(`No ships were placed in the board: ${this.board}`);
+    } else {
+      console.log('Ready confirmed! Sending Ships...');
+
+      let dto: SendShipsRequestDto = {
+        board: this.board,
+        playerId: this.playerId,
+        gameCode: this.gameCode,
+      };
+
+      this.gameService.sendShips(dto).subscribe((result) => {
+        if (this.gameCode == result.gameCode) {
+          console.log('Ships added successfully!');
+        }
+      });
     }
-
-    console.log('Ready confirmed! Sending Ships');
-    let dto: SendShipsRequestDto = {
-      board: this.board,
-      playerId: this.playerId,
-      gameCode: this.gameCode,
-    };
-
-    this.gameService.sendShips(dto).subscribe((result) => {
-      if (this.gameCode == result.gameCode) {
-        console.log('Ships added successfully!');
-      }
-    });
   }
 }
