@@ -1,3 +1,24 @@
-<div class='centre'>
-  <app-game-board></app-game-board>
+<div cdkDropListGroup>
+  <div class="boards-container">
+    <div class="host-board-container">
+      <h2>Your Board</h2>
+      <!-- <mat-checkbox class="checkReadyUp">Ready Up</mat-checkbox> -->
+      <app-host-board
+        [gameCode]="GameCode"
+        [boardId]="HostPlayerBoardId"
+        [playerId]="HostPlayerId"
+      ></app-host-board>
+    </div>
+    <!-- *ngIf="gameStarted" -->
+    <div class="opponent-board-container">
+      <h2>Opponent Board</h2>
+      <app-opponent-board
+        [boardId]="OpponentBoardId"
+        [playerId]="OpponentId"
+      ></app-opponent-board>
+    </div>
+  </div>
+  <div class="ship-selector-container" *ngIf="!gameStarted">
+    <app-ship-selector></app-ship-selector>
+  </div>
 </div>

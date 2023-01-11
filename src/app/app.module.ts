@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -19,7 +20,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home-page/home.component';
 import { ProfileComponent } from './pages/profile-page/profile.component';
 import { CreateGameComponent } from './pages/create-game/create-game.component';
-import { GameBoardComponent } from './components/game-board/game-board.component';
+import { GameBoardComponent } from './components/opponent-board/opponent-board.component';
 
 import { PlayerService } from 'src/app/services/player.service';
 import { GameService } from 'src/app/services/game.service';
@@ -45,8 +46,11 @@ import {
 
 import { msalConfig, loginRequest, protectedResources } from './auth-config';
 import { FormsModule } from '@angular/forms';
-import { BoardCellComponent } from './components/board-cell/board-cell.component';
+import { BoardCellComponent } from './components/opponent-cell/opponent-cell.component';
 import { ShipComponent } from './components/ship/ship.component';
+import { ShipSelectorComponent } from './components/ship-selector/ship-selector.component';
+import { HostBoardComponent } from './components/host-board/host-board.component';
+import { HostCellComponent } from './components/host-cell/host-cell.component';
 
 export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication(msalConfig);
@@ -83,6 +87,9 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     CreateGameComponent,
     PlayComponent,
     ShipComponent,
+    ShipSelectorComponent,
+    HostBoardComponent,
+    HostCellComponent,
   ],
   imports: [
     BrowserModule,
@@ -100,6 +107,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     HttpClientModule,
     FormsModule,
     MsalModule,
+    DragDropModule,
   ],
   providers: [
     {

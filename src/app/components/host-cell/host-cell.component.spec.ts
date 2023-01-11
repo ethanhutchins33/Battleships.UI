@@ -1,19 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BoardCellComponent } from './board-cell.component';
+import { HostCellComponent } from './host-cell.component';
 
-describe('BoardCellComponent', () => {
-  let component: BoardCellComponent;
-  let fixture: ComponentFixture<BoardCellComponent>;
+describe('HostCellComponent', () => {
+  let component: HostCellComponent;
+  let fixture: ComponentFixture<HostCellComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [BoardCellComponent],
-    }).compileComponents();
+      declarations: [ HostCellComponent ]
+    })
+    .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BoardCellComponent);
+    fixture = TestBed.createComponent(HostCellComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
