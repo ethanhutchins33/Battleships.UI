@@ -1,10 +1,5 @@
-import {
-  CdkDragDrop,
-  moveItemInArray,
-  transferArrayItem,
-} from '@angular/cdk/drag-drop';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Component, Output, EventEmitter, Input } from '@angular/core';
-import { ship } from 'src/app/models/ship';
 
 @Component({
   selector: 'app-host-cell',
@@ -14,27 +9,12 @@ import { ship } from 'src/app/models/ship';
 export class HostCellComponent {
   constructor() {}
 
-  @Input() status: string = 'test';
+  @Input() status: string = '';
   @Output() shipDropped = new EventEmitter<any>();
 
-  ships: ship[] = [];
-
-  onDrop(event: CdkDragDrop<ship[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    }
-    console.log(event);
-    this.shipDropped.emit(event);
+  onDrop($event: CdkDragDrop<string[]>) {
+    console.log($event);
+    this.shipDropped.emit($event);
+    
   }
 }

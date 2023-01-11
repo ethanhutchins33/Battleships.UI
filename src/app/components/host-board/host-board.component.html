@@ -5,13 +5,13 @@
 </div>
 
 <div class="host-board">
-  <div class="host-row" *ngFor="let row of board; let i = index">
+  <div class="host-row" *ngFor="let row of board; let y = index">
     <!-- <th>{{ i + 1 }}</th> -->
-    <div class="host-cells" *ngFor="let cell of row; let j = index">
+    <div class="host-cells" *ngFor="let cell of row; let x = index">
       <app-host-cell
         class="host-cell"
-        [status]="board[i][j]"
-        (shipDropped)="addShip($event, i, j)"
+        [status]="board[x][y]"
+        (shipDropped)="addShip($event, x, y)"
       ></app-host-cell>
     </div>
   </div>

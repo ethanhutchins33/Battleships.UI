@@ -4,13 +4,13 @@
 </div>
 
 <div class="opponent-board">
-  <div class="host-row" *ngFor="let row of board; let i = index">
+  <div class="host-row" *ngFor="let row of board; let y = index">
     <!-- <th>{{ i + 1 }}</th> -->
-    <div class="host-cells" *ngFor="let cell of row; let j = index">
+    <div class="host-cells" *ngFor="let cell of row; let x = index">
       <app-opponent-cell
         class="opponent-cell"
-        [xCoord]="i"
-        [yCoord]="j"
+        [xCoord]="x"
+        [yCoord]="y"
         (cellClicked)="fireTorpedo($event)"
       ></app-opponent-cell>
     </div>
