@@ -37,7 +37,7 @@ export class GameBoardComponent {
       this.route.params.subscribe((params: any) => {
         dto = {
           GameCode: params.gameCode,
-          BoardId: 0,
+          BoardId: this.boardId,
           X: $event.X,
           Y: $event.Y,
         };
