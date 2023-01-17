@@ -1,4 +1,7 @@
 export interface Player {
-  id: string;
-  azureId: string;
+  id: number;
+  name: string;
+  boardId: number;
+  ready: boolean;
+  board: string[][];
 }

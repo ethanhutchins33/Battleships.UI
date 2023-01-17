@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { Player } from '../models/player';
+import { Profile } from '../models/profile';
 
 @Injectable({
   providedIn: 'root',
@@ -10,8 +10,10 @@ import { Player } from '../models/player';
 export class PlayerService {
   constructor(private http: HttpClient) {}
 
-  getPlayer(): Observable<Player> {
+  getPlayer(): Observable<Profile> {
     console.log('Trying to get player...');
-    return this.http.get<Player>(`${environment.BattleShipsApiUrl}/player/get`);
+    return this.http.get<Profile>(
+      `${environment.BattleShipsApiUrl}/player/get`
+    );
   }
 }

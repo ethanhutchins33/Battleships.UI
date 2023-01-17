@@ -1,3 +1,4 @@
+import { PollLobbyResponseDto } from './../responses/PollLobbyResponseDto';
 import { ShotFiredDto } from './../requests/ShotFiredRequestDto';
 import { Injectable } from '@angular/core';
 import { FireShotResponseDto } from '../responses/FireShotResponseDto';
@@ -5,6 +6,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { CreateGameResponseDto } from 'src/app/responses/CreateGameResponseDto';
+import { FullLobbyDetailsDto } from '../responses/FullLobbyDetailsDto';
 import { JoinGameResponseDto } from '../responses/JoinGameResponseDto';
 import { SendShipsRequestDto } from '../requests/SendShipsRequestDto';
 import { AddShipsResponseDto } from '../responses/AddShipsResponseDto';
@@ -41,13 +43,37 @@ export class GameService {
   }
 
   sendShips(
-    sendShipsDto: SendShipsRequestDto
+    sendShipsRequestDto: SendShipsRequestDto
   ): Observable<AddShipsResponseDto> {
-    console.log('hitting sendships API');
+    console.log('Sending Ships to API...');
     return this.http.post<AddShipsResponseDto>(
       `${environment.BattleShipsApiUrl}/game/addships`,
-      sendShipsDto
+      sendShipsRequestDto
     );
+  }
+
+  getFullLobbyDetails(
+    gameCode: string,
+    hostId: number
+  ): Observable<FullLobbyDetailsDto> {
+    return this.http.get<FullLobbyDetailsDto>(
+      `${environment.BattleShipsApiUrl}/game/state/${gameCode}/${hostId}`
+    );
+  }
+
+  getLobbyReadyStatus(
+    gameId: number,
+    hostId: number
+  ): Observable<PollLobbyResponseDto> {
+    return new Observable((observer) => {
+      this.http
+        .get<PollLobbyResponseDto>(
+          `${environment.BattleShipsApiUrl}/game/lobby/${gameId}/${hostId}`
+        )
+        .subscribe((response) => {
+          observer.next(response);
+        });
+    });
   }
 
   getNewBoard(): string[][] {
