@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Player } from 'src/app/models/player';
+import { Profile } from 'src/app/models/profile';
 import { PlayerService } from '../../services/player.service';
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 
@@ -9,13 +9,13 @@ const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
-  player!: Player;
+  profile!: Profile;
 
   constructor(private playerService: PlayerService) {}
 
   ngOnInit() {
-    this.playerService.getPlayer().subscribe((player) => {
-      this.player = player;
+    this.playerService.getPlayer().subscribe((profile) => {
+      this.profile = profile;
     });
   }
 }

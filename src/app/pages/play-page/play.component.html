@@ -1,24 +1,35 @@
 <div cdkDropListGroup>
   <div class="boards-container">
     <div class="host-board-container">
-      <h2>Your Board</h2>
-      <!-- <mat-checkbox class="checkReadyUp">Ready Up</mat-checkbox> -->
-      <app-host-board
-        [gameCode]="GameCode"
-        [boardId]="HostPlayerBoardId"
-        [playerId]="HostPlayerId"
-      ></app-host-board>
+      <div class="host-board-details">
+        <h2>Your Board</h2>
+        <p>Name: {{ this.host.name }}</p>
+        <p>Ready: {{ this.host.ready }}</p>
+        <p>PlayerId: {{ this.host.id }}</p>
+        <p>BoardId: {{ this.host.boardId }}</p>
+      </div>
+      <app-host-board [(board)]="this.host.board"></app-host-board>
     </div>
-    <!-- *ngIf="gameStarted" -->
-    <div class="opponent-board-container">
-      <h2>Opponent Board</h2>
+
+    <div class="opponent-board-container" *ngIf="GameStarted">
+      <div class="opponent-board-details">
+        <h2>Opponent Board</h2>
+        <p>Name: {{ this.opponent.name }}</p>
+        <p>PlayerId: {{ this.opponent.id }}</p>
+        <p>BoardId: {{ this.opponent.boardId }}</p>
+      </div>
       <app-opponent-board
-        [boardId]="OpponentBoardId"
-        [playerId]="OpponentId"
+        [board]="this.opponent.board"
+        [boardId]="this.opponent.boardId"
       ></app-opponent-board>
     </div>
   </div>
-  <div class="ship-selector-container" *ngIf="!gameStarted">
-    <app-ship-selector></app-ship-selector>
+  <div class="ship-selector-container" *ngIf="!this.host.ready">
+    <div class="ships-container">
+      <app-ship-selector></app-ship-selector>
+    </div>
+    <div class="button-ready-container">
+      <button class="button-ready" (click)="btnReadyClicked()">Ready Up</button>
+    </div>
   </div>
 </div>
