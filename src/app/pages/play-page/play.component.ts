@@ -76,7 +76,7 @@ export class PlayComponent implements OnInit {
 
   getFullLobbyDetails() {
     this.gameService
-      .getFullLobbyDetails(this.GameCode, this.host.id)
+      .getFullLobbyDetails(this.gameId, this.host.id)
       .subscribe((result) => {
         (this.host.id = result.hostId),
           (this.host.name = result.hostName),
