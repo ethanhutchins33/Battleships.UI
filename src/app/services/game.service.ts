@@ -53,11 +53,11 @@ export class GameService {
   }
 
   getFullLobbyDetails(
-    gameCode: string,
+    gameId: number,
     hostId: number
   ): Observable<FullLobbyDetailsDto> {
     return this.http.get<FullLobbyDetailsDto>(
-      `${environment.BattleShipsApiUrl}/game/state/${gameCode}/${hostId}`
+      `${environment.BattleShipsApiUrl}/game/state/${gameId}/${hostId}`
     );
   }
 
