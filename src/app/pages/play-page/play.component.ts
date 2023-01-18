@@ -1,4 +1,4 @@
-import { PollLobbyResponseDto } from './../../responses/PollLobbyResponseDto';
+import { shot } from './../../models/shot';
 import { GameService } from 'src/app/services/game.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -15,8 +15,11 @@ export class PlayComponent implements OnInit {
   host!: Player;
   opponent!: Player;
   gameId!: number;
-  GameCode!: string;
-  GameStarted: boolean = false;
+  gameCode!: string;
+  gameStarted: boolean = false;
+  hostTurn: boolean = false;
+  lastShot!: shot;
+  gameOver: boolean = false;
 
   subscription!: Subscription;
   private intervalId: NodeJS.Timeout | undefined;
@@ -43,19 +46,42 @@ export class PlayComponent implements OnInit {
     };
 
     this.route.params.subscribe((params: any) => {
-      this.GameCode = params.gameCode;
-      this.gameService.joinGame(params.gameCode).subscribe((result) => {
-        this.gameId = result.gameId;
-        this.host.id = result.playerId;
-        this.host.name = result.playerName;
-        this.host.boardId = result.boardId;
-      });
+      this.gameCode = params.gameCode;
     });
 
-    this.poll();
+    this.gameService.joinGame(this.gameCode).subscribe((result) => {
+      this.gameId = result.gameId;
+      this.host.id = result.playerId;
+      this.host.name = result.playerName;
+      this.host.boardId = result.boardId;
+    });
+
+    if (!this.gameStarted && !this.gameOver) {
+      this.pollLobbyReadyStatus();
+    }
+
+    if (this.gameStarted && !this.gameOver) {
+      this.pollLastShot();
+    }
+
+    if (this.gameStarted && this.gameOver) {
+      //this.getWinner();
+    }
   }
 
-  poll() {
+  pollLastShot() {
+    this.subscription = new Subscription();
+
+    this.intervalId = setInterval(() => {
+      this.subscription.add(
+        this.gameService.getLastShot(this.gameId).subscribe((result) => {
+          this.lastShot = result.lastShot;
+        })
+      );
+    }, 1000);
+  }
+
+  pollLobbyReadyStatus() {
     this.subscription = new Subscription();
 
     this.intervalId = setInterval(() => {
@@ -64,8 +90,8 @@ export class PlayComponent implements OnInit {
           .getLobbyReadyStatus(this.gameId, this.host.id)
           .subscribe((result) => {
             if (result.lobbyStatus) {
+              this.gameStarted = true;
               this.getFullLobbyDetails();
-              this.GameStarted = true;
               clearInterval(this.intervalId);
               this.subscription.unsubscribe();
             }
@@ -100,11 +126,11 @@ export class PlayComponent implements OnInit {
       let dto: SendShipsRequestDto = {
         board: this.host.board,
         playerId: this.host.id,
-        gameCode: this.GameCode,
+        gameCode: this.gameCode,
       };
 
       this.gameService.sendShips(dto).subscribe((result) => {
-        if (this.GameCode == result.gameCode) {
+        if (this.gameCode == result.gameCode) {
           console.log('Ships added successfully!');
           this.host.ready = true;
         }
@@ -114,7 +140,7 @@ export class PlayComponent implements OnInit {
 
   startGame() {
     if (this.host.ready && this.opponent.ready) {
-      this.GameStarted = true;
+      this.gameStarted = true;
     }
   }
 }

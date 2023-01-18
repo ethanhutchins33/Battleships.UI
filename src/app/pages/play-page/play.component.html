@@ -4,14 +4,14 @@
       <div class="host-board-details">
         <h2>Your Board</h2>
         <p>Name: {{ this.host.name }}</p>
-        <p>Ready: {{ this.host.ready }}</p>
+        <p *ngIf="!gameStarted">Ready: {{ this.host.ready }}</p>
         <p>PlayerId: {{ this.host.id }}</p>
         <p>BoardId: {{ this.host.boardId }}</p>
       </div>
       <app-host-board [(board)]="this.host.board"></app-host-board>
     </div>
 
-    <div class="opponent-board-container" *ngIf="GameStarted">
+    <div class="opponent-board-container" *ngIf="gameStarted">
       <div class="opponent-board-details">
         <h2>Opponent Board</h2>
         <p>Name: {{ this.opponent.name }}</p>

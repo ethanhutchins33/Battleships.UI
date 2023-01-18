@@ -10,6 +10,7 @@ import { FullLobbyDetailsDto } from '../responses/FullLobbyDetailsDto';
 import { JoinGameResponseDto } from '../responses/JoinGameResponseDto';
 import { SendShipsRequestDto } from '../requests/SendShipsRequestDto';
 import { AddShipsResponseDto } from '../responses/AddShipsResponseDto';
+import { GetLastShotResponseDto } from '../responses/GetLastShotResponseDto';
 
 @Injectable({
   providedIn: 'root',
@@ -68,12 +69,18 @@ export class GameService {
     return new Observable((observer) => {
       this.http
         .get<PollLobbyResponseDto>(
-          `${environment.BattleShipsApiUrl}/game/lobby/${gameId}/${hostId}`
+          `${environment.BattleShipsApiUrl}/game/ready/${gameId}`
         )
         .subscribe((response) => {
           observer.next(response);
         });
     });
+  }
+
+  getLastShot(gameId: number): Observable<GetLastShotResponseDto> {
+    return this.http.get<GetLastShotResponseDto>(
+      `${environment.BattleShipsApiUrl}/game/last/${gameId}`
+    );
   }
 
   getNewBoard(): string[][] {
