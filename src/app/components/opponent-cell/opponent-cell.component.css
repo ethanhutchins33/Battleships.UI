@@ -1,9 +1,9 @@
 .opponent-cell:hover {
-  background-color: white; /* change the background color when the mouse is hovering over the cell */
+  background-color: lightgray; /* change the background color when the mouse is hovering over the cell */
   outline: 3px solid black; /* add an outline to the cell */
 }
 
-.hidden {
+.opponent-cell {
   background-color: grey;
 }
 

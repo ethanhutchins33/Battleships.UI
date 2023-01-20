@@ -6,6 +6,7 @@
         class="opponent-cell"
         [xCoord]="x"
         [yCoord]="y"
+        [hostTurn]="this.hostTurn"
         (cellClicked)="fireTorpedo($event)"
       ></app-opponent-cell>
     </div>

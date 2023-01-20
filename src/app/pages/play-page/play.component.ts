@@ -1,6 +1,6 @@
 import { shot } from './../../models/shot';
 import { GameService } from 'src/app/services/game.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SendShipsRequestDto } from 'src/app/requests/SendShipsRequestDto';
 import { Player } from 'src/app/models/player';
@@ -11,13 +11,13 @@ import { Subscription } from 'rxjs';
   templateUrl: './play.component.html',
   styleUrls: ['./play.component.css'],
 })
-export class PlayComponent implements OnInit {
+export class PlayComponent implements OnInit, OnDestroy {
   host!: Player;
   opponent!: Player;
   gameId!: number;
   gameCode!: string;
   gameStarted: boolean = false;
-  hostTurn: boolean = false;
+  hostTurn: boolean = true;
   lastShot!: shot;
   gameOver: boolean = false;
 
@@ -59,13 +59,15 @@ export class PlayComponent implements OnInit {
     if (!this.gameStarted && !this.gameOver) {
       this.pollLobbyReadyStatus();
     }
+  }
 
-    if (this.gameStarted && !this.gameOver) {
-      this.pollLastShot();
+  ngOnDestroy(): void {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
     }
 
-    if (this.gameStarted && this.gameOver) {
-      //this.getWinner();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
 
@@ -75,10 +77,21 @@ export class PlayComponent implements OnInit {
     this.intervalId = setInterval(() => {
       this.subscription.add(
         this.gameService.getLastShot(this.gameId).subscribe((result) => {
-          this.lastShot = result.lastShot;
+          if (this.lastShot != result.lastShot) {
+            this.lastShot = result.lastShot;
+            console.log('Last shot arrived!');
+            console.log(this.lastShot);
+
+            if (this.lastShot.boardId == this.host.boardId) {
+              this.host.board[result.lastShot.x][result.lastShot.y] =
+                result.lastShot.shotStatus;
+              this.hostTurn = true;
+              console.log(this.hostTurn);
+            }
+          }
         })
       );
-    }, 1000);
+    }, 2000);
   }
 
   pollLobbyReadyStatus() {
@@ -87,13 +100,14 @@ export class PlayComponent implements OnInit {
     this.intervalId = setInterval(() => {
       this.subscription.add(
         this.gameService
-          .getLobbyReadyStatus(this.gameId, this.host.id)
+          .getLobbyReadyStatus(this.gameId)
           .subscribe((result) => {
             if (result.lobbyStatus) {
-              this.gameStarted = true;
-              this.getFullLobbyDetails();
               clearInterval(this.intervalId);
               this.subscription.unsubscribe();
+              this.gameStarted = true;
+              this.getFullLobbyDetails();
+              this.pollLastShot();
             }
           })
       );
@@ -138,9 +152,19 @@ export class PlayComponent implements OnInit {
     }
   }
 
-  startGame() {
-    if (this.host.ready && this.opponent.ready) {
-      this.gameStarted = true;
-    }
+  setGameStartedDateTime() {
+    this.gameService.setGameStartedDate(this.gameId);
   }
+
+  getWhichPlayersTurn() {}
+
+  // runGame() {
+  //   do {
+  //     if (!this.gameOver) {
+  //       this.pollLastShot();
+  //     } else {
+  //       //this.getWinner();
+  //     }
+  //   } while (this.gameStarted);
+  // }
 }

@@ -12,9 +12,12 @@ export class BoardCellComponent {
 
   @Input() xCoord: number = 0;
   @Input() yCoord: number = 0;
+  @Input() hostTurn: boolean = false;
   @Output() cellClicked = new EventEmitter<cellLocationEvent>();
-  cellStatus: cellStatus = { status: 'hidden' };
+  cellStatus: cellStatus = { status: '' };
   onClick(): void {
-    this.cellClicked.emit({ X: this.xCoord, Y: this.yCoord });
+    if (this.hostTurn) {
+      this.cellClicked.emit({ X: this.xCoord, Y: this.yCoord });
+    }
   }
 }
