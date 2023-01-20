@@ -15,15 +15,11 @@ import { ShotFiredDto } from 'src/app/requests/ShotFiredRequestDto';
 })
 export class GameBoardComponent {
   @Input() boardId!: number;
-  @Input() playerId!: number;
+  @Input() board!: string[][];
+  @Input() hostTurn: boolean = false;
   @ViewChildren(BoardCellComponent) cells!: QueryList<BoardCellComponent>;
 
-  constructor(
-    private gameService: GameService,
-    private route: ActivatedRoute
-  ) {}
-
-  board: string[][] = this.gameService.getNewBoard();
+  constructor(private gameService: GameService) {}
 
   fireTorpedo($event: cellLocationEvent) {
     console.log($event);
@@ -32,20 +28,17 @@ export class GameBoardComponent {
     );
 
     if (tempCell) {
-      let dto: ShotFiredDto;
+      let shot: ShotFiredDto = {
+        BoardId: this.boardId,
+        X: $event.X,
+        Y: $event.Y,
+      };
 
-      this.route.params.subscribe((params: any) => {
-        dto = {
-          GameCode: params.gameCode,
-          BoardId: 0,
-          X: $event.X,
-          Y: $event.Y,
-        };
-
-        this.gameService.fireShot(dto).subscribe((result) => {
-          tempCell.cellStatus.status = result.shotResult;
-        });
+      this.gameService.fireShot(shot).subscribe((result) => {
+        tempCell.cellStatus.status = result.shotResult;
       });
+
+      //this.hostTurn = false;
     }
   }
 }

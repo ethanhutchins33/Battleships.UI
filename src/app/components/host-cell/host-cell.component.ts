@@ -15,6 +15,5 @@ export class HostCellComponent {
   onDrop($event: CdkDragDrop<string[]>) {
     console.log($event);
     this.shipDropped.emit($event);
-    
   }
 }

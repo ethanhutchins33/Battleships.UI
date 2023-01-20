@@ -1,8 +1,3 @@
-<div class="opponent-board-details">
-  <p>Opponent PlayerId: {{ playerId }}</p>
-  <p>Opponent BoardId: {{ boardId }}</p>
-</div>
-
 <div class="opponent-board">
   <div class="host-row" *ngFor="let row of board; let y = index">
     <!-- <th>{{ i + 1 }}</th> -->
@@ -11,6 +6,7 @@
         class="opponent-cell"
         [xCoord]="x"
         [yCoord]="y"
+        [hostTurn]="this.hostTurn"
         (cellClicked)="fireTorpedo($event)"
       ></app-opponent-cell>
     </div>

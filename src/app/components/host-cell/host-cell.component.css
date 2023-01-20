@@ -1,0 +1,11 @@
+.ship {
+  background-color: rgb(93, 93, 250);
+}
+
+.missed {
+  background-color: rgb(93, 250, 93);
+}
+
+.hit {
+  background-color: rgb(253, 92, 92);
+}
