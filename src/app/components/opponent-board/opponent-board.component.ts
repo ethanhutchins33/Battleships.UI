@@ -16,12 +16,10 @@ import { ShotFiredDto } from 'src/app/requests/ShotFiredRequestDto';
 export class GameBoardComponent {
   @Input() boardId!: number;
   @Input() board!: string[][];
+  @Input() hostTurn: boolean = false;
   @ViewChildren(BoardCellComponent) cells!: QueryList<BoardCellComponent>;
 
-  constructor(
-    private gameService: GameService,
-    private route: ActivatedRoute
-  ) {}
+  constructor(private gameService: GameService) {}
 
   fireTorpedo($event: cellLocationEvent) {
     console.log($event);
@@ -39,6 +37,8 @@ export class GameBoardComponent {
       this.gameService.fireShot(shot).subscribe((result) => {
         tempCell.cellStatus.status = result.shotResult;
       });
+
+      //this.hostTurn = false;
     }
   }
 }
