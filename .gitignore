@@ -76,3 +76,4 @@ terraform.rc
 # System files
 .DS_Store
 Thumbs.db
+build/terraform/terraform.tfstate
