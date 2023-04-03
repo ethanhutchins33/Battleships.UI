@@ -13,21 +13,21 @@ jobs:
     steps:
       - task: NodeTool@0
         inputs:
-          versionSpec: "16.x"
-        displayName: "Install Node.js"
+          versionSpec: '16.x'
+        displayName: 'Install Node.js'
 
       - script: |
           corepack enable
           npm install -g @angular/cli@13.2.6
-          yarn
+          npm install
           ng build --configuration 'production'
-        displayName: "Yarn - Install Angular CLI and build app"
-        workingDirectory: "$(Build.SourcesDirectory)"
+        displayName: 'NPM - Install Angular CLI and build app'
+        workingDirectory: '$(Build.SourcesDirectory)'
 
       - bash: |
           terraform init
-        displayName: "terraform init"
-        workingDirectory: "$(Build.SourcesDirectory)/terraform"
+        displayName: 'terraform init'
+        workingDirectory: '$(Build.SourcesDirectory)/terraform'
         env:
           TF_VAR_ARM_SUBSCRIPTION_ID: $(tf-subscription-id)
           TF_VAR_ARM_TENANT_ID: $(tf-tenant-id)
@@ -37,8 +37,8 @@ jobs:
 
       - bash: |
           terraform plan -input=false -out=tfplan
-        displayName: "terraform plan"
-        workingDirectory: "$(Build.SourcesDirectory)/terraform"
+        displayName: 'terraform plan'
+        workingDirectory: '$(Build.SourcesDirectory)/terraform'
         env:
           TF_VAR_ARM_SUBSCRIPTION_ID: $(tf-subscription-id)
           TF_VAR_ARM_TENANT_ID: $(tf-tenant-id)
@@ -48,8 +48,8 @@ jobs:
 
       - bash: |
           terraform apply "tfplan"
-        displayName: "terraform apply"
-        workingDirectory: "$(Build.SourcesDirectory)/terraform"
+        displayName: 'terraform apply'
+        workingDirectory: '$(Build.SourcesDirectory)/terraform'
         env:
           TF_VAR_ARM_SUBSCRIPTION_ID: $(tf-subscription-id)
           TF_VAR_ARM_TENANT_ID: $(tf-tenant-id)
@@ -57,7 +57,7 @@ jobs:
           TF_VAR_ARM_CLIENT_SECRET: $(tf-client-secret)
           ARM_ACCESS_KEY: $(tf-access-key)
 
-      - publish: "$(System.DefaultWorkingDirectory)/dist/battle-ships"
+      - publish: '$(System.DefaultWorkingDirectory)/dist/battle-ships'
         artifact: drop
 
       - task: AzureCLI@2
